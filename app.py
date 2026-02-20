@@ -13,14 +13,9 @@ from memory.embedder import Embedder
 from core.tutor_policy import build_system_prompt
 from core.llm_client import LLMClient
 
-DB_PATH = r"data\fine-tuning-database.json"
-GEN_PATH = r"data\generated_exercises.jsonl"
-
-# ✅ Put your logo file here (recommended):
-# Create folder: assets/
-# Save the logo as: assets/logo.png
-LOGO_PATH = r"assets\logo.png"
-
+DB_PATH  = "data/fine-tuning-database.json"
+GEN_PATH = "data/generated_exercises.jsonl"
+LOGO_PATH = "assets/logo.png"
 MODEL_CHOICES = {
     "Gemini 3 Flash (rapide)": "gemini-3-flash",
     "Gemini 3 Pro (meilleur raisonnement)": "gemini-3-pro",
@@ -104,7 +99,7 @@ st.caption("Interface en français • Sélectionnez une section et un chapitre,
 # ----------------------------
 def get_api_key() -> str:
     # 1) env var (never crashes)
-    k = os.getenv("GEMINI_API_KEY", "").strip()
+    k = os.getenv("GEMINI_API_KEY", "").strip()  or st.secrets["GEMINI_API_KEY"]
     if k:
         return k
     # 2) Streamlit secrets (can raise if no secrets file exists)
