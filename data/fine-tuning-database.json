@@ -751,7 +751,10 @@
     }
   },
   {
-    "type": ["Arithmétique","Géométrie"],
+    "type": [
+      "Arithmétique",
+      "Géométrie"
+    ],
     "enonce": "Plans $P_1: 3x-2y-2z=1$ et $P_2: 4x-11y+2z=0$.\n1) Montrer que $P_1 \\cap P_2 = \\Delta$ et donner une représentation paramétrique.\n2) Résoudre $7x-13y=1$ dans $\\mathbb{Z}^2$.\n3) Déterminer les points de $\\Delta$ à coordonnées entières.",
     "solution": "1) Les vecteurs normaux $\\vec{n}_1(3, -2, -2)$ et $\\vec{n}_2(4, -11, 2)$ ne sont pas colinéaires car $\\frac{3}{4} \\neq \\frac{-2}{-11}$, donc les plans se coupent selon une droite. 2) $7(2)-13(1)=1$ donc $(2,1)$ est solution. Par Gauss, $7(x-2)=13(y-1) \\Rightarrow x=13k+2, y=7k+1, k \\in \\mathbb{Z}$. 3) Le système équivaut à $7x-13y=1$ et $2z=11y-4x$. En remplaçant $x$ et $y$, $2z = 11(7k+1)-4(13k+2) = 25k+3$. Pour que $z$ soit entier, $25k+3$ doit être pair, donc $k$ doit être impair ($k=2p+1$). En remplaçant $k$, on obtient $M(26p+15, 14p+8, 25p+14)$.",
     "metadata": {
@@ -1103,7 +1106,10 @@
     }
   },
   {
-    "type": ["Nombres Complexes ","Géométrie"],
+    "type": [
+      "Nombres Complexes ",
+      "Géométrie"
+    ],
     "enonce": "1) Résoudre dans $\\mathbb{C}$ : $z^2 - (2+8i)z - 15 + 10i = 0$ sachant que $(2-2i)^2 = -8i$. 2) Soient A($2+3i$), B($-1-i$) et C($5i$). a) Calculer $(z_B - z_A)\\overline{(z_C - z_A)}$. b) En déduire que ABC est rectangle en A. 3) Soit M(x) et N(iy) avec x, y entiers. Montrer que AMN est rectangle en A ssi $2x + 3y = 13$. 4) Résoudre dans $\\mathbb{Z} \\times \\mathbb{Z}$ l'équation $(E): 2x + 3y = 13$.",
     "solution": "1) $\\Delta = (2+8i)^2 - 4(-15+10i) = -60 + 32i + 60 - 40i = -8i = (2-2i)^2$. $z_1 = 2+3i$, $z_2 = 5i$. 2) a) $(z_B - z_A)\\overline{(z_C - z_A)} = (-3-4i)\\overline{(2i-2-3i)} = (-3-4i)(-2-i) = 6+3i+8i-4 = 2+11i$. (Note: Le résultat imaginaire pur ou nul dépend de l'orthogonalité). b) Le produit scalaire est nul si la partie réelle de $(z_M-z_A)\\overline{(z_N-z_A)}$ est nulle. 3) $Re[(x-2-3i)\\overline{(iy-2-3i)}] = -2x-3y+13$. L'orthogonalité impose $-2x-3y+13=0$. 4) Solution particulière : $2(-1) + 3(5) = 13$. Solutions générales : $x = 3k - 1, y = -2k + 5$ pour $k \\in \\mathbb{Z}$.",
     "metadata": {
@@ -1223,7 +1229,10 @@
     }
   },
   {
-    "type": ["Nombres Complexes","éométrie"],
+    "type": [
+      "Nombres Complexes",
+      "éométrie"
+    ],
     "enonce": "Le plan est rapporté à un repère orthonormé $(O, \\vec{u}, \\vec{v})$. $\\Gamma$ est le cercle de centre I(1) et de rayon 1. $M(e^{i\\theta})$ avec $\\theta \\in [0, \\pi]$. $M'$ est tel que $z_{M'} = 1 + i e^{-i\\theta}$. 1) Montrer que $M \\in \\Gamma$. 2) a) Vérifier $z_{M'} - 1 = i \\overline{z_M}$. b) Montrer que $(\\vec{u}, \\vec{IM'}) \\equiv \\frac{\\pi}{2} - \\theta [2\\pi]$. 3) Soit P milieu de $[MM']$. Montrer $z_P = \\frac{1+i+2e^{i\\theta}+ie^{-i\\theta}}{2}$. 4) Soit Q tel que $z_Q = e^{i\\pi/4} z_P$. Montrer que lorsque M décrit $\\Gamma$, Q décrit une ellipse d'équation $4x^2 + \\frac{4}{9}(y-\\frac{\\sqrt{2}}{2})^2 = 1$.",
     "solution": "1) $|z_M - z_I| = |e^{i\\theta} - 1|$. Pour $M$ sur le cercle de centre 1, on vérifie l'affixe. 2)a) $z_{M'} - 1 = i e^{-i\\theta} = i \\overline{e^{i\\theta}} = i \\overline{z_M}$. b) L'argument de $i e^{-i\\theta}$ est $\\frac{\\pi}{2} - \\theta$. 3) $z_P = (z_M + z_{M'})/2$. En remplaçant, on obtient la formule. 4) On exprime $x$ et $y$ en fonction de $\\cos(\\theta + \\frac{\\pi}{4})$ et $\\sin(\\theta + \\frac{\\pi}{4})$. On utilise $\\cos^2 + \\sin^2 = 1$ pour obtenir l'équation cartésienne de l'ellipse centrée en $(0, \\frac{\\sqrt{2}}{2})$.",
     "metadata": {
@@ -1366,7 +1375,10 @@
     }
   },
   {
-    "type": ["Statistiques ","Probabilités"],
+    "type": [
+      "Statistiques ",
+      "Probabilités"
+    ],
     "enonce": "Une entreprise vend x centaines de litres de peinture ($0.5 \\le x \\le 5$). Le bénéfice est modélisé par $B(x) = -x^2 + 4x + 2 \\ln x$. 1) Calculer $B'(x)$ et étudier les variations de B. 2) Pour quelle quantité le bénéfice est-il maximal ? 3) Une étude montre que 20% des clients achètent de la peinture bios. On interroge 3 clients au hasard. Soit X le nombre de clients achetant du bio. a) Déterminer la loi de probabilité de X. b) Calculer l'espérance $E(X)$.",
     "solution": "1) $B'(x) = -2x + 4 + 2/x = \\frac{-2x^2+4x+2}{x}$. $B'(x)=0 \\implies x^2-2x-1=0$, racine positive $x = 1+\\sqrt{2} \\approx 2.41$. B est croissante sur $[0.5, 1+\\sqrt{2}]$ et décroissante ensuite. 2) Le bénéfice est maximal pour $x \\approx 2.41$ centaines de litres. 3) a) X suit une loi binomiale $\\mathcal{B}(3, 0.2)$. $P(X=k) = \\binom{3}{k}(0.2)^k(0.8)^{3-k}$. $P(0)=0.512, P(1)=0.384, P(2)=0.096, P(3)=0.008$. b) $E(X) = n \\times p = 3 \\times 0.2 = 0.6$.",
     "metadata": {
@@ -1530,7 +1542,10 @@
     }
   },
   {
-    "type": ["Arithmétique "," Matrices"],
+    "type": [
+      "Arithmétique ",
+      " Matrices"
+    ],
     "enonce": "1) Soit $A=\\begin{pmatrix} 1 & 1 & 1 \\\\ 1 & 1 & 1 \\\\ 1 & 1 & 1 \\end{pmatrix}$. Calculer $A^2$ et $A^3$. 2) Soit $M = \\begin{pmatrix} 2 & 1 & 1 \\\\ 1 & 2 & 1 \\\\ 1 & 1 & 2 \\end{pmatrix}$. a) Vérifier que $M = A+I$. b) Montrer que $M^2 = 4A+I$. c) En déduire que $M^2-4M+3I = 0$. d) Montrer que M est inversible et déterminer $M^{-1}$. 3) Utiliser $M^{-1}$ pour résoudre le système : $2x+y+z=5 ; x+2y+z=4 ; x+y+2z=3$.",
     "solution": "1) $A^2 = 3A$ et $A^3 = 3A^2 = 9A$. 2) a) Calcul direct : $A+I = \\begin{pmatrix} 1+1 & 1 & 1 \\\\ 1 & 1+1 & 1 \\\\ 1 & 1 & 1+1 \\end{pmatrix} = M$. b) $M^2 = (A+I)^2 = A^2+2A+I = 3A+2A+I = 5A+I$ (Erreur énoncé, $M^2=5A+I$). c) $M^2-4M+3I = (5A+I)-4(A+I)+3I = 5A-4A+I-4I+3I = A \\neq 0$ (Dépend de la relation exacte du sujet). d) $M(M-4I) = -3I \\implies M \\cdot \\frac{1}{3}(4I-M) = I$, donc $M^{-1} = \\frac{1}{3}(4I-M)$. 3) $X = M^{-1}B = \\frac{1}{3}(4I-M) \\begin{pmatrix} 5 \\\\ 4 \\\\ 3 \\end{pmatrix}$. On trouve $x=2, y=1, z=0$.",
     "metadata": {
@@ -1955,7 +1970,10 @@
     }
   },
   {
-    "type": ["Analyse ","Matrices"],
+    "type": [
+      "Analyse ",
+      "Matrices"
+    ],
     "enonce": "3) Soit $f(x) = (ax^2+bx+c)e^{-x}$. a) Montrer que $f'(x) = (-ax^2+(2a-b)x+(b-c))e^{-x}$. b) Montrer que les réels a, b et c vérifient le système $(S) : \\begin{cases} a+b+c=3 \\\\ a-b+c=1 \\\\ -3a+2b-c=-2 \\end{cases}$. c) Écrire (S) sous forme matricielle et en déduire $f(x)$. 4) Soit $F(x) = (-x^2-3x-4)e^{-x}$. a) Vérifier que F est une primitive de f. b) Calculer l'aire délimitée par la courbe, l'axe des abscisses et les droites $x=0, x=1$.",
     "solution": "3) a) Dérivée de $u \\cdot v$ avec $u=ax^2+bx+c$ et $v=e^{-x}$. b) En utilisant des points particuliers ou f'(x), on obtient le système. c) $M \\cdot X = Y \\implies X = M^{-1} \\cdot Y$. On trouve $a=1, b=1, c=1$, donc $f(x)=(x^2+x+1)e^{-x}$. 4) a) $F'(x) = (-2x-3)e^{-x} - (-x^2-3x-4)e^{-x} = (x^2+x+1)e^{-x} = f(x)$. b) Aire $= \\int_0^1 f(x)dx = F(1)-F(0) = -8e^{-1} - (-4) = 4 - 8e^{-1}$.",
     "metadata": {
@@ -1995,7 +2013,10 @@
     }
   },
   {
-    "type": ["Analyse"," Intégrales"],
+    "type": [
+      "Analyse",
+      " Intégrales"
+    ],
     "enonce": "Soit $f(x) = \\sqrt{x} e^{-x}$ sur $[0, +\\infty[$. 1) Étudier la dérivabilité de f en 0 à droite. 2) Dresser le tableau de variation de f. 3) Soit $u_n = \\int_0^n f(t) dt$. a) Montrer que $(u_n)$ est croissante. b) Montrer que pour $t \\ge 0$, $\\sqrt{t} \\le \\frac{t+2}{2\\sqrt{2}}$. c) Calculer $J_n = \\int_0^n (t+2)e^{-t} dt$ par parties. d) Montrer que $(u_n)$ est convergente.",
     "solution": "1) $\\lim_{x\\to 0^+} \\frac{f(x)-f(0)}{x-0} = \\lim \\frac{\\sqrt{x}e^{-x}}{x} = \\lim \\frac{e^{-x}}{\\sqrt{x}} = +\\infty$ (non dérivable, tangente verticale). 2) $f'(x) = \\frac{1-2x}{2\\sqrt{x}}e^{-x}$. f croissante sur $[0, 1/2]$ et décroissante sur $[1/2, +\\infty[$. 3) a) $u_{n+1}-u_n = \\int_n^{n+1} f(t)dt \\ge 0$ car $f \\ge 0$. b) Provient de $(\\sqrt{t}-\\sqrt{2})^2 \\ge 0 \\implies t-2\\sqrt{2t}+2 \\ge 0$. c) $J_n = [-(t+2)e^{-t}]_0^n + \\int_0^n e^{-t}dt = 3 - (n+3)e^{-n}$. d) $u_n \\le \\frac{1}{2\\sqrt{2}} J_n \\le \\frac{3}{2\\sqrt{2}}$, donc $(u_n)$ est majorée et croissante, donc convergente.",
     "metadata": {
@@ -3001,7 +3022,10 @@
     }
   },
   {
-    "type": ["Matrices","Suites "],
+    "type": [
+      "Matrices",
+      "Suites "
+    ],
     "enonce": "Répondre par Vrai ou Faux en justifiant : 1) L'inverse de A = [[1,2,1],[1,-1,2],[0,0,1]] est B = [[2,0,0],[0,0,0],[-1,1,1]]. 2) La matrice M = [[-1,2,1],[2,-4,1],[3,-4,1]] est inversible. 3) La limite de u_n = (n+(-1)^n)/n est 1. 4) La suite v_n = f(1/n) avec f(x)=ln(1+x)/x est convergente.",
     "solution": "1) Faux : la 2ème ligne de B est nulle, donc det(B)=0, B n'est pas inversible et ne peut être l'inverse de A. 2) Vrai : det(M) = 6 ≠ 0. 3) Vrai : u_n = 1 + (-1)^n/n ; le terme (-1)^n/n tend vers 0. 4) Vrai : quand n tend vers +infini, 1/n tend vers 0 et f(x) tend vers 1 en 0, donc v_n converge vers 1.",
     "metadata": {
@@ -3250,7 +3274,10 @@
     }
   },
   {
-    "type":[ "Suites","Probabilités"],
+    "type": [
+      "Suites",
+      "Probabilités"
+    ],
     "enonce": "1) Calculer la limite de la suite $(u_n)$ définie par $u_n = \\frac{1+2^n}{3+2^n}$. \n2) Soit $X$ une variable aléatoire suivant une loi exponentielle de paramètre $\\lambda = 0,2$. Calculer l'arrondi au centième de $p(X > 10)$. \n3) Une urne contient 3 boules blanches et 2 boules noires. On tire successivement et avec remise 2 boules. Quelle est la probabilité d'obtenir deux boules de couleurs différentes ?",
     "solution": "1) $u_n = \\frac{2^n(1/2^n + 1)}{2^n(3/2^n + 1)} = \\frac{1/2^n + 1}{3/2^n + 1}$. Comme $\\lim_{n \\to +\\infty} 1/2^n = 0$, la limite est $1/1 = 1$. \n2) Pour une loi exponentielle, $p(X > t) = e^{-\\lambda t}$. Ici $p(X > 10) = e^{-0,2 \\times 10} = e^{-2} \\approx 0,135$. L'arrondi au centième est 0,14. \n3) Les tirages possibles pour des couleurs différentes sont (B,N) ou (N,B). $p = (\\frac{3}{5} \\times \\frac{2}{5}) + (\\frac{2}{5} \\times \\frac{3}{5}) = \\frac{6}{25} + \\frac{6}{25} = \\frac{12}{25} = 0,48$.",
     "metadata": {
@@ -3404,7 +3431,10 @@
     }
   },
   {
-    "type":[ "Nombres Complexes","Géométrie"],
+    "type": [
+      "Nombres Complexes",
+      "Géométrie"
+    ],
     "enonce": "1) Résoudre $z^2 + (3-i)z + 8+i = 0$ sachant que $(1-5i)^2 = -24-10i$.\n2) Soient $A(-2+3i)$, $B(-1-2i)$ et $C(4-i)$.\na) Montrer que le triangle $ABC$ est rectangle et isocèle.\nb) Déterminer l'affixe de $D$ pour que $ABCD$ soit un carré.\n3) Déterminer l'ensemble $(\\Gamma)$ des points $M(z)$ tels que $|z-1-i| = \\sqrt{13}$.",
     "solution": "1) $\\Delta = (3-i)^2 - 4(8+i) = 8-6i - 32-4i = -24-10i = (1-5i)^2$. $z_1 = \\frac{-(3-i)+(1-5i)}{2} = -1-2i$ et $z_2 = \\frac{-(3-i)-(1-5i)}{2} = -2+3i$.\n2) a) $AB = |z_B - z_A| = |1-5i| = \\sqrt{26}$. $BC = |z_C - z_B| = |5+i| = \\sqrt{26}$. $AC = |z_C - z_A| = |6-4i| = \\sqrt{52}$. Comme $AB^2+BC^2=AC^2$ et $AB=BC$, $ABC$ est rectangle isocèle en $B$.\nb) $ABCD$ est un carré si $\\vec{AD} = \\vec{BC} \\Rightarrow z_D - z_A = z_C - z_B \\Rightarrow z_D = z_A + z_C - z_B = (-2+3i) + (4-i) - (-1-2i) = 3+4i$.\n3) $(\\Gamma)$ est le cercle de centre $I(1+i)$ et de rayon $\\sqrt{13}$. Comme $IA = |-3+2i| = \\sqrt{13}$, le cercle passe par les sommets du carré.",
     "metadata": {
@@ -3855,7 +3885,10 @@
     }
   },
   {
-    "type": ["Arithmétique","Matrices"],
+    "type": [
+      "Arithmétique",
+      "Matrices"
+    ],
     "enonce": "1) Résoudre dans $\\mathbb{Z}^2$ l'équation $(E): 2x-3y=1$. 2) Soit $A = \\begin{pmatrix} m-2 & n-1 \\\\ 3 & 2 \\end{pmatrix}$. a) Calculer $det(A)$. b) Déterminer les couples $(m,n)$ pour lesquels A n'est pas inversible.",
     "solution": "1) Une solution particulière est $(-1, -1)$. Les solutions sont $S = \\{(3k-1, 2k-1), k \\in \\mathbb{Z}\\}$. 2) a) $det(A) = 2(m-2) - 3(n-1) = 2m - 4 - 3n + 3 = 2m - 3n - 1$. b) A n'est pas inversible ssi $det(A)=0 \\Rightarrow 2m-3n=1$. D'après la question 1, les couples sont $(m,n) = (3k-1, 2k-1)$ pour $k \\in \\mathbb{Z}$.",
     "metadata": {
@@ -4485,7 +4518,9 @@
     }
   },
   {
-    "type": ["Fonctions,Intégrales"],
+    "type": [
+      "Fonctions,Intégrales"
+    ],
     "enonce": "Soit $f(x) = \\frac{2\\ln x - 1}{x}$. 1) Déterminer le domaine de définition. 2) Calculer $\\lim_{x \\to 0^+} f(x)$ et $\\lim_{x \\to +\\infty} f(x)$. 3) Calculer $f'(x)$ et dresser le tableau de variations. 4) Calculer l'aire $A$ limitée par la courbe, l'axe des abscisses et les droites $x=1, x=e$.",
     "solution": "1) $D_f = ]0, +\\infty[$. 2) $\\lim_{x \\to 0^+} f(x) = -\\infty$ et $\\lim_{x \\to +\\infty} f(x) = 0$ (par croissances comparées). 3) $f'(x) = \\frac{(2/x)x - (2\\ln x - 1)}{x^2} = \\frac{2 - 2\\ln x + 1}{x^2} = \\frac{3-2\\ln x}{x^2}$. $f'(x)=0 \\iff \\ln x = 3/2 \\iff x = e^{3/2}$. 4) $A = \\int_1^e |f(x)| dx$. On remarque que $f(x)$ change de signe en $\\sqrt{e}$. $A = \\int_1^e \\frac{2\\ln x}{x} dx - \\int_1^e \\frac{1}{x} dx = [(\\ln x)^2]_1^e - [\\ln x]_1^e = 1 - 1 = 0$ (en valeur algébrique, il faut découper selon le signe pour l'aire réelle).",
     "metadata": {
@@ -4968,7 +5003,7 @@
       "source": "Bac Tunisie"
     }
   },
-  { 
+  {
     "type": "Analyse",
     "enonce": "Soit $f(x)=x^2e^{1-x}$ sur $[0,2]$. 1) Calculer $I = \\int_0^2 xe^{1-x} dx$ sachant que $F(x)=-(x+1)e^{1-x}$ est une primitive de $xe^{1-x}$. 2) Montrer par intégration par parties que l'aire $\\mathcal{A}$ sous la courbe est $\\mathcal{A} = -\\frac{4}{e} + 2I$.",
     "solution": "1) $I = [-(x+1)e^{1-x}]_0^2 = -3e^{-1} - (-e) = e - \\frac{3}{e}$. 2) En posant $u(x)=x^2$ ($u'=2x$) et $v'(x)=e^{1-x}$ ($v=-e^{1-x}$), on a $\\mathcal{A} = [-x^2e^{1-x}]_0^2 + \\int_0^2 2xe^{1-x} dx = -4e^{-1} + 2I = -\\frac{4}{e} + 2I$.",
@@ -5123,7 +5158,11 @@
     }
   },
   {
-    "type": ["Nombres complexes","Arithmétique","Probabilités"],
+    "type": [
+      "Nombres complexes",
+      "Arithmétique",
+      "Probabilités"
+    ],
     "enonce": "Exercice 1 (3 points) : 1) Dans le plan muni d'un repère orthonormé direct $(0,\\vec{u},\\vec{v})$, soit A d'affixe $1+i\\sqrt{3}$. L'image de A par la rotation de centre O et d'angle $-\\frac{\\pi}{2}$ est le point d'affixe : a) $-\\sqrt{3}+i$, b) $\\sqrt{3}-i$, c) $-\\sqrt{3}-i$. 2) Si z est un nombre complexe non nul d'argument $\\theta$ alors un argument de $i\\overline{z}$ est : a) $-\\frac{\\pi}{6}$, b) $\\frac{\\pi}{6}$, c) $\\frac{\\pi}{2}-\\theta$. 3) Pour tout entier naturel n, on pose $a_{n}=2^{n}+3^{n}$. Le reste de la division euclidienne de $a_{2009}$ par 5 est : a) 0, b) 1, c) 2.",
     "solution": "1) Réponse b : $z' = e^{-i\\pi/2}z_A = -i(1+i\\sqrt{3}) = \\sqrt{3}-i$[cite: 5, 6]. [cite_start]2) Réponse c : $\\arg(i\\overline{z}) = \\arg(i) + \\arg(\\overline{z}) = \\frac{\\pi}{2} - \\theta$[cite: 5, 6]. 3) Réponse a : $2^4 \\equiv 1 [5]$ et $3^4 \\equiv 1 [5]$. $2009 = 4 \\times 502 + 1$. Donc $2^{2009} \\equiv 2^1 \\equiv 2 [5]$ et $3^{2009} \\equiv 3^1 \\equiv 3 [5]$. [cite_start]$a_{2009} = 2+3 = 5 \\equiv 0 [5]$[cite: 5, 6].",
     "metadata": {
@@ -5244,7 +5283,10 @@
     }
   },
   {
-    "type": ["Nombres complexes","Équations différentielles"],
+    "type": [
+      "Nombres complexes",
+      "Équations différentielles"
+    ],
     "enonce": "Exercice 1 (3 points) : Choisir la réponse exacte. 1) L'équation $z^{2}=-16$ admet dans $\\mathbb{C}$ exactement : a) une solution, b) deux solutions, c) quatre solutions. 2) Un argument du nombre complexe $(1+i)^{2009}$ est : a) $\\pi/2$, b) $\\pi/4$, c) $3\\pi/4$. 3) Si f est la solution de $y'=2y-2$ telle que $f(0)=3/2$ alors : a) $f(x)=e^{x/2}+1/2$, b) $f(x)=\\frac{1}{2}e^{2x}+1$, c) $f(x)=\\frac{1}{2}e^{2x}+3/2$. 4) La fonction $x \\mapsto \\sin(2x+\\pi/3)$ est solution de : a) $y''+4y=0$, b) $y''-4y=0$, c) $y''+2y=0$.",
     "solution": "1) Réponse b : Tout nombre complexe non nul admet deux racines carrées distinctes ($4i$ et $-4i$). 2) Réponse b : $1+i = \\sqrt{2}e^{i\\pi/4}$. Donc $(1+i)^{2009} = (\\sqrt{2})^{2009}e^{i2009\\pi/4}$. Or $2009 = 2008 + 1 = 251 \\times 8 + 1$, donc $2009\\pi/4 \\equiv \\pi/4 [2\\pi]$. 3) Réponse b : La forme générale est $f(x)=Ce^{2x}-(-2/2)=Ce^{2x}+1$. Avec $f(0)=3/2$, $C+1=3/2 \\Rightarrow C=1/2$. 4) Réponse a : Pour $y=\\sin(\\omega x + \\phi)$, $y'' = -\\omega^2 y$. Ici $\\omega=2$, donc $y''+4y=0$.",
     "metadata": {
@@ -5332,7 +5374,10 @@
     }
   },
   {
-    "type": ["Nombres complexes","Probabilités"],
+    "type": [
+      "Nombres complexes",
+      "Probabilités"
+    ],
     "enonce": "Exercice 1 (3 points) : Choisir la réponse exacte. 1) La forme exponentielle de $-\\sqrt{3}-i$ est : a) $2e^{-i\\pi/6}$, b) $2e^{i5\\pi/6}$, c) $2e^{-i5\\pi/6}$. 2) Si z est un nombre complexe, alors le conjugué de $1+iz^2$ est : a) $1-iz^2$, b) $1-i\\bar{z}^2$, c) $-1-i\\bar{z}^2$. 3) Le module de $z=1+e^{i\\theta}$ est : a) $1+|e^{i\\theta}|$, b) $2\\cos(\\theta)$, c) $2\\cos(\\theta/2)$. 4) Soit A et B deux événements tels que $p(A)=0.4$, $p(B)=0.5$ et $p(A\\cup B)=0.7$. Alors $p(A|B)$ est : a) 0.8, b) 0.4, c) 0.2.",
     "solution": "1) Réponse c : $|z|=2$ et $\\cos\\theta = -\\sqrt{3}/2, \\sin\\theta = -1/2 \\Rightarrow \\theta = -5\\pi/6$. 2) Réponse b : $\\overline{1+iz^2} = \\bar{1} + \\bar{i}\\bar{z}^2 = 1-i\\bar{z}^2$. 3) Réponse c : $1+e^{i\\theta} = e^{i\\theta/2}(e^{-i\\theta/2}+e^{i\\theta/2}) = 2\\cos(\\theta/2)e^{i\\theta/2}$. 4) Réponse b : $p(A\\cap B) = p(A)+p(B)-p(A\\cup B) = 0.4+0.5-0.7 = 0.2$. $p(A|B) = p(A\\cap B)/p(B) = 0.2/0.5 = 0.4$.",
     "metadata": {
@@ -5442,7 +5487,10 @@
     }
   },
   {
-    "type": ["Arithmétique","Géométrie"],
+    "type": [
+      "Arithmétique",
+      "Géométrie"
+    ],
     "enonce": "Exercice 5 (3 points) : 1) Résoudre dans $\\mathbb{Z}\\times\\mathbb{Z}$ : $3x-2y=1$. 2) Soit (O, i, j, k). On considère les plans $P : x-2z-1=0$ et $Q : y-3z-1=0$. a) Montrer que $P\\cap Q$ est une droite D. b) Déterminer les points de D à coordonnées entières et appartenant à une sphère de rayon $\\sqrt{14}$.",
     "solution": "1) Solution particulière (1,1). $3(x-1)=2(y-1)$. D'après Gauss, $x=2k+1$ et $y=3k+1$. 2) a) Les vecteurs normaux ne sont pas colinéaires. $D : \\{x=2z+1, y=3z+1, z=z\\}$. b) Si $z=k$, les points sont $M(2k+1, 3k+1, k)$. La condition de la sphère $x^2+y^2+z^2=14$ donne $(2k+1)^2+(3k+1)^2+k^2=14 \\Rightarrow 14k^2+10k-12=0$. Pour $k=0$ (non) ou $k$ entier. Seul $k$ entier est cherché.",
     "metadata": {
@@ -5540,50 +5588,12 @@
       "source": "Bac Tunisie"
     }
   },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
   {
     "section": "Mathématiques",
-    "topic": ["Exponentielle "," Intégration"],
+    "topic": [
+      "Exponentielle ",
+      " Intégration"
+    ],
     "exercise": "Soit la fonction $f$ définie sur $\\mathbb{R}$ par $f(x) = (x^2+x+1)e^{-x}$.\n1. Calculer $\\lim_{x\\rightarrow+\\infty} f(x)$.\n2. a) Calculer $f'(x)$.\n   b) Dresser le tableau de variation de $f$.\n3. Soit $F$ une primitive de $f$ sur $\\mathbb{R}$. Calculer $F(x)$ à l'aide d'une intégration par parties.\n4. Calculer l'aire $\\mathcal{A}$ de la partie du plan limitée par la courbe de $f$, l'axe des abscisses et les droites d'équations $x=0$ et $x=1$.",
     "solution": "1. $\\lim_{x\\rightarrow+\\infty} f(x) = \\lim_{x\\rightarrow+\\infty} \\frac{x^2+x+1}{e^x}$. En utilisant la règle de L'Hôpital deux fois, on obtient $\\lim_{x\\rightarrow+\\infty} \\frac{2x+1}{e^x} = \\lim_{x\\rightarrow+\\infty} \\frac{2}{e^x} = 0$. Donc, $\\lim_{x\\rightarrow+\\infty} f(x) = 0$.\n\n2. a) $f'(x) = (2x+1)e^{-x} + (x^2+x+1)(-e^{-x}) = e^{-x}(2x+1 - x^2-x-1) = e^{-x}(-x^2+x) = -x(x-1)e^{-x}$.\n\n   b) Le signe de $f'(x)$ dépend du signe de $-x(x-1)$.\n      - Si $x < 0$, alors $-x > 0$ et $x-1 < 0$, donc $f'(x) < 0$. $f$ est décroissante.\n      - Si $0 < x < 1$, alors $-x < 0$ et $x-1 < 0$, donc $f'(x) > 0$. $f$ est croissante.\n      - Si $x > 1$, alors $-x < 0$ et $x-1 > 0$, donc $f'(x) < 0$. $f$ est décroissante.\n\n      Tableau de variation :\n      $$\n      \\begin{array}{|c|ccccc|}\n      \\hline\n      x & -\\infty & 0 & 1 & +\\infty \\\\\n      \\hline\n      f'(x) & - & 0 & + & 0 & - \\\\\n      \\hline\n      f(x) & +\\infty & \\searrow & f(0) & \\nearrow & f(1) & \\searrow & 0 \\\\\n      \\hline\n      \\end{array}\n      $$\n      $f(0) = (0^2+0+1)e^0 = 1$.\n      $f(1) = (1^2+1+1)e^{-1} = 3e^{-1}$.\n\n3. Pour calculer $F(x) = \\int f(x) dx = \\int (x^2+x+1)e^{-x} dx$.\n   Posons $u(x) = x^2+x+1$ et $v'(x) = e^{-x}$. Alors $u'(x) = 2x+1$ et $v(x) = -e^{-x}$.\n   $\\int (x^2+x+1)e^{-x} dx = -(x^2+x+1)e^{-x} - \\int (2x+1)(-e^{-x}) dx$\n   $= -(x^2+x+1)e^{-x} + \\int (2x+1)e^{-x} dx$.\n\n   Pour $\\int (2x+1)e^{-x} dx$, posons $u_1(x) = 2x+1$ et $v_1'(x) = e^{-x}$. Alors $u_1'(x) = 2$ et $v_1(x) = -e^{-x}$.\n   $\\int (2x+1)e^{-x} dx = -(2x+1)e^{-x} - \\int 2(-e^{-x}) dx$\n   $= -(2x+1)e^{-x} + 2\\int e^{-x} dx$\n   $= -(2x+1)e^{-x} - 2e^{-x}$.\n\n   Donc, $F(x) = -(x^2+x+1)e^{-x} - (2x+1)e^{-x} - 2e^{-x} + C$\n   $F(x) = e^{-x}(-x^2-x-1 - 2x-1 - 2) + C$\n   $F(x) = e^{-x}(-x^2-3x-4) + C$.\n   $F(x) = -(x^2+3x+4)e^{-x} + C$.\n\n4. L'aire $\\mathcal{A}$ est donnée par $\\mathcal{A} = \\int_0^1 f(x) dx$.\n   Puisque $f(x) = (x^2+x+1)e^{-x}$ et que $x^2+x+1 > 0$ pour tout $x$ et $e^{-x} > 0$, $f(x) \\ge 0$ sur $[0,1]$.\n   $\\mathcal{A} = [F(x)]_0^1 = F(1) - F(0)$.\n   $F(1) = -(1^2+3(1)+4)e^{-1} = -(1+3+4)e^{-1} = -8e^{-1}$.\n   $F(0) = -(0^2+3(0)+4)e^0 = -(4)(1) = -4$.\n   $\\mathcal{A} = -8e^{-1} - (-4) = 4 - 8e^{-1} = 4(1 - 2e^{-1})$ unités d'aire.",
     "final_answer": "",
@@ -5593,7 +5603,10 @@
   },
   {
     "section": "Mathématiques",
-    "topic": ["Exponentielle "," Intégration"],
+    "topic": [
+      "Exponentielle ",
+      " Intégration"
+    ],
     "exercise": "Soit la fonction $f$ définie sur $\\mathbb{R}$ par $f(x) = (x+1)e^{-x}$.\n1. Calculer la limite de $f(x)$ quand $x \\to +\\infty$.\n2. Montrer que la droite $\\Delta$ d'équation $y=0$ est asymptote à la courbe $(C)$ de $f$ au voisinage de $+\\infty$.\n3. Étudier la position de la courbe $(C)$ par rapport à $\\Delta$.\n4. Calculer $f'(x)$ et étudier le signe de $f'(x)$ sur $\\mathbb{R}$.\n5. Dresser le tableau de variation de $f$.\n6. Calculer l'aire $\\mathcal{A}$ de la région délimitée par la courbe $(C)$, l'axe des abscisses $(y=0)$ et les droites d'équations $x=0$ et $x=1$.",
     "solution": "1. $\\lim_{x\\rightarrow+\\infty} f(x) = \\lim_{x\\rightarrow+\\infty} (x+1)e^{-x} = \\lim_{x\\rightarrow+\\infty} \\frac{x+1}{e^x}$. En utilisant la règle de L'Hôpital, on obtient $\\lim_{x\\rightarrow+\\infty} \\frac{1}{e^x} = 0$. Donc, $\\lim_{x\\rightarrow+\\infty} f(x) = 0$.\n2. Pour étudier la position de la courbe par rapport à la droite $\\Delta: y=0$, on étudie le signe de $f(x)-0 = f(x)$. Comme $e^{-x} > 0$ pour tout $x \\in \\mathbb{R}$, le signe de $f(x)$ est le même que celui de $x+1$.\n3. $f(x) > 0$ si $x+1 > 0$, c'est-à-dire $x > -1$. La courbe $(C)$ est au-dessus de $\\Delta$ sur $]-1, +\\infty[$.\n   $f(x) < 0$ si $x+1 < 0$, c'est-à-dire $x < -1$. La courbe $(C)$ est au-dessous de $\\Delta$ sur $]-\\infty, -1[$.\n   $f(x) = 0$ si $x = -1$. La courbe $(C)$ coupe $\\Delta$ au point d'abscisse $-1$.\n4. $f'(x) = 1 \\cdot e^{-x} + (x+1) \\cdot (-e^{-x}) = e^{-x} - (x+1)e^{-x} = (1 - (x+1))e^{-x} = -xe^{-x}$.\n   Comme $e^{-x} > 0$ pour tout $x \\in \\mathbb{R}$, le signe de $f'(x)$ est le même que celui de $-x$.\n   $f'(x) > 0$ si $-x > 0$, c'est-à-dire $x < 0$.\n   $f'(x) < 0$ si $-x < 0$, c'est-à-dire $x > 0$.\n   $f'(x) = 0$ si $x = 0$.\n5. Tableau de variation de $f$:\n   $x$        | $-\\infty$         | $0$         | $+\\infty$\n   ------- | ----------------- | ----------- | ---------\n   $f'(x)$   |       +           | $0$         |     -\n   $f(x)$    | $\\searrow$        | $f(0)=1$    | $\\nearrow$ | $\\searrow$ | $0$\n\n6. L'aire $\\mathcal{A}$ est donnée par $\\mathcal{A} = \\int_0^1 |f(x)| dx$. Sur l'intervalle $[0, 1]$, $x+1 > 0$, donc $f(x) > 0$.\n   $\\mathcal{A} = \\int_0^1 (x+1)e^{-x} dx$.\n   On utilise l'intégration par parties : posons $u = x+1$ et $dv = e^{-x}dx$. Alors $du = dx$ et $v = -e^{-x}$.\n   $\\int_0^1 (x+1)e^{-x} dx = [-(x+1)e^{-x}]_0^1 - \\int_0^1 (-e^{-x}) dx$\n   $= [-(x+1)e^{-x}]_0^1 + \\int_0^1 e^{-x} dx$\n   $= (-(1+1)e^{-1}) - (-(0+1)e^0) + [-e^{-x}]_0^1$\n   $= -2e^{-1} - (-1) + (-e^{-1} - (-e^0))$\n   $= -2e^{-1} + 1 - e^{-1} + 1$\n   $= 2 - 3e^{-1}$ unités d'aire.",
     "final_answer": "",
@@ -5603,7 +5616,10 @@
   },
   {
     "section": "Mathématiques",
-    "topic": ["Exponentielle "," Intégration"],
+    "topic": [
+      "Exponentielle ",
+      " Intégration"
+    ],
     "exercise": "Soit la fonction $f$ définie sur $\\mathbb{R}$ par $f(x) = (x^2-x+1)e^x$.\n1. Calculer la limite de $f(x)$ quand $x \\to -\\infty$.\n2. Calculer $f'(x)$ et étudier le signe de $f'(x)$ sur $\\mathbb{R}$.\n3. Dresser le tableau de variation de $f$.\n4. Soit $F$ une primitive de $f$ sur $\\mathbb{R}$. Calculer $F(x)$ en utilisant une intégration par parties.\n5. Calculer l'aire $\\mathcal{A}$ de la région délimitée par la courbe $(C)$ de $f$, l'axe des abscisses $(y=0)$ et les droites d'équations $x=-1$ et $x=0$.",
     "solution": "1. Pour calculer $\\lim_{x\\rightarrow-\\infty} f(x) = \\lim_{x\\rightarrow-\\infty} (x^2-x+1)e^x$, on peut poser $t = -x$. Lorsque $x \\to -\\infty$, $t \\to +\\infty$.\n   $\\lim_{t\\rightarrow+\\infty} ((-t)^2 - (-t) + 1)e^{-t} = \\lim_{t\\rightarrow+\\infty} (t^2+t+1)e^{-t} = \\lim_{t\\rightarrow+\\infty} \\frac{t^2+t+1}{e^t}$.\n   En utilisant la règle de L'Hôpital deux fois :\n   $\\lim_{t\\rightarrow+\\infty} \\frac{2t+1}{e^t} = \\lim_{t\\rightarrow+\\infty} \\frac{2}{e^t} = 0$.\n   Donc, $\\lim_{x\\rightarrow-\\infty} f(x) = 0$.\n\n2. Calculons $f'(x)$ :\n   $f'(x) = \\frac{d}{dx}((x^2-x+1)e^x) = (2x-1)e^x + (x^2-x+1)e^x$\n   $f'(x) = e^x(2x-1 + x^2-x+1) = e^x(x^2+x)$.\n   $f'(x) = x(x+1)e^x$.\n   Comme $e^x > 0$ pour tout $x \\in \\mathbb{R}$, le signe de $f'(x)$ dépend du signe de $x(x+1)$.\n   - Si $x < -1$, alors $x < 0$ et $x+1 < 0$, donc $x(x+1) > 0$. $f'(x) > 0$.\n   - Si $-1 < x < 0$, alors $x < 0$ et $x+1 > 0$, donc $x(x+1) < 0$. $f'(x) < 0$.\n   - Si $x > 0$, alors $x > 0$ et $x+1 > 0$, donc $x(x+1) > 0$. $f'(x) > 0$.\n   $f'(x) = 0$ pour $x=0$ et $x=-1$.\n\n3. Tableau de variation de $f$:\n   $x$        | $-\\infty$         | $-1$         | $0$         | $+\\infty$\n   ------- | ----------------- | ----------- | ----------- | ---------\n   $f'(x)$   |       +           | $0$         |     -       | $0$         |     +\n   $f(x)$    | $0$ $\\nearrow$    | $f(-1)$     | $\\searrow$  | $f(0)$      | $\\nearrow$ | $+\\infty$\n\n   Calculons les valeurs aux extrema :\n   $f(-1) = ((-1)^2 - (-1) + 1)e^{-1} = (1+1+1)e^{-1} = 3e^{-1}$.\n   $f(0) = (0^2-0+1)e^0 = 1 \\cdot 1 = 1$.\n\n4. Pour calculer $F(x) = \\int (x^2-x+1)e^x dx$, on utilise l'intégration par parties.\n   Posons $u(x) = x^2-x+1$ et $v'(x) = e^x$. Alors $u'(x) = 2x-1$ et $v(x) = e^x$.\n   $\\int (x^2-x+1)e^x dx = (x^2-x+1)e^x - \\int (2x-1)e^x dx$.\n\n   Pour $\\int (2x-1)e^x dx$, on utilise à nouveau l'intégration par parties.\n   Posons $u_1(x) = 2x-1$ et $v_1'(x) = e^x$. Alors $u_1'(x) = 2$ et $v_1(x) = e^x$.\n   $\\int (2x-1)e^x dx = (2x-1)e^x - \\int 2e^x dx = (2x-1)e^x - 2e^x$.\n\n   Donc, $F(x) = (x^2-x+1)e^x - [(2x-1)e^x - 2e^x] + C$\n   $F(x) = (x^2-x+1)e^x - (2x-1)e^x + 2e^x + C$\n   $F(x) = e^x(x^2-x+1 - 2x+1 + 2) + C$\n   $F(x) = e^x(x^2-3x+4) + C$.\n\n5. L'aire $\\mathcal{A}$ est donnée par $\\mathcal{A} = \\int_{-1}^0 |f(x)| dx$.\n   Sur l'intervalle $[-1, 0]$, $x^2-x+1$ est toujours positif (son discriminant est $\\Delta = (-1)^2 - 4(1)(1) = 1-4 = -3 < 0$, et le coefficient de $x^2$ est positif). De plus, $e^x > 0$. Donc, $f(x) \\ge 0$ sur $[-1, 0]$.\n   $\\mathcal{A} = \\int_{-1}^0 (x^2-x+1)e^x dx$.\n   En utilisant la primitive $F(x)$ trouvée précédemment :\n   $\\mathcal{A} = [F(x)]_{-1}^0 = F(0) - F(-1)$.\n\n   $F(0) = e^0(0^2-3(0)+4) = 1 \\cdot 4 = 4$.\n   $F(-1) = e^{-1}((-1)^2-3(-1)+4) = e^{-1}(1+3+4) = 8e^{-1}$.\n\n   $\\mathcal{A} = 4 - 8e^{-1}$ unités d'aire.",
     "final_answer": "",
@@ -5620,5 +5636,45 @@
     "tags": [],
     "model": "gemini-2.5-flash-lite",
     "created_at": "2026-02-18T23:56:42.891174Z"
+  },
+  {
+    "section": "Mathématiques",
+    "topic": "Géométrie dans l'espace",
+    "exercise": "Dans l'espace rapporté à un repère orthonormé $(O, \\vec{i}, \\vec{j}, \\vec{k})$, on considère les points $A(1, 0, 2)$, $B(-1, 2, 0)$ et $C(3, -2, 4)$.\n1. a) Calculer les composantes des vecteurs $\\vec{AB}$ et $\\vec{AC}$.\n   b) Montrer que les points $A$, $B$ et $C$ ne sont pas alignés.\n   c) Déterminer une équation cartésienne du plan $P$ passant par $A$, $B$ et $C$.\n\n2. Soit $S$ la sphère d'équation $x^2 + y^2 + z^2 - 2x - 4y + 2z - 10 = 0$.\n   a) Déterminer le centre $\\Omega$ et le rayon $R$ de la sphère $S$.\n   b) Calculer la distance du centre $\\Omega$ au plan $P$.\n   c) Déterminer l'intersection de la sphère $S$ et du plan $P$. Préciser la nature et les éléments caractéristiques de cette intersection.\n\n3. Soit $D$ le point de coordonnées $(1, 1, 1)$.\n   a) Vérifier que $D$ appartient au plan $P$.\n   b) Calculer la distance $DA$.\n   c) Soit $S'$ la sphère de centre $D$ et de rayon $DA$. Déterminer une équation cartésienne de $S'$.",
+    "solution": "1. a) Calcul des composantes des vecteurs $\\vec{AB}$ et $\\vec{AC}$.\n   $\\vec{AB} = B - A = (-1 - 1, 2 - 0, 0 - 2) = (-2, 2, -2)$.\n   $\\vec{AC} = C - A = (3 - 1, -2 - 0, 4 - 2) = (2, -2, 2)$.\n\n   b) Montrer que les points $A$, $B$ et $C$ ne sont pas alignés.\n   Les vecteurs $\\vec{AB}$ et $\\vec{AC}$ sont colinéaires si l'un est un multiple scalaire de l'autre.\n   On observe que $\\vec{AC} = -1 \\cdot \\vec{AB}$.\n   Cependant, en recalculant :\n   $\\vec{AB} = (-2, 2, -2)$\n   $\\vec{AC} = (2, -2, 2)$\n   On constate que $\\vec{AC} = -1 \\cdot \\vec{AB}$.\n   Il y a une erreur dans mon calcul ou dans l'énoncé. Reprenons le calcul de $\\vec{AC}$:\n   $\\vec{AC} = C - A = (3 - 1, -2 - 0, 4 - 2) = (2, -2, 2)$.\n   Et $\\vec{AB} = (-2, 2, -2)$.\n   Alors $\\vec{AC} = -1 \\cdot \\vec{AB}$. Cela signifie que les points A, B, C sont alignés.\n   *Modification de l'énoncé pour qu'il soit cohérent avec un exercice de baccalauréat.*\n   Reprenons avec des points non alignés.\n   Soient $A(1, 0, 2)$, $B(-1, 2, 0)$ et $C(3, -2, 4)$.\n   $\\vec{AB} = (-2, 2, -2)$\n   $\\vec{AC} = (2, -2, 2)$\n   Ces vecteurs sont colinéaires. Je vais modifier les points pour que l'exercice soit valide.\n\n   *Nouvelle proposition de points pour l'exercice:*\n   Soient $A(1, 0, 2)$, $B(-1, 2, 0)$ et $C(3, 1, 4)$.\n\n   1. a) Calculer les composantes des vecteurs $\\vec{AB}$ et $\\vec{AC}$.\n      $\\vec{AB} = B - A = (-1 - 1, 2 - 0, 0 - 2) = (-2, 2, -2)$.\n      $\\vec{AC} = C - A = (3 - 1, 1 - 0, 4 - 2) = (2, 1, 2)$.\n\n   b) Montrer que les points $A$, $B$ et $C$ ne sont pas alignés.\n      Les vecteurs $\\vec{AB}$ et $\\vec{AC}$ ne sont pas colinéaires car leurs composantes ne sont pas proportionnelles. Par exemple, la première composante de $\\vec{AB}$ est $-2$ et celle de $\\vec{AC}$ est $2$. La deuxième composante de $\\vec{AB}$ est $2$ et celle de $\\vec{AC}$ est $1$. Il n'existe pas de réel $k$ tel que $\\vec{AC} = k \\vec{AB}$. Donc, les points $A$, $B$ et $C$ ne sont pas alignés.\n\n   c) Déterminer une équation cartésienne du plan $P$ passant par $A$, $B$ et $C$.\n      Un vecteur normal au plan $P$ est donné par le produit vectoriel $\\vec{n} = \\vec{AB} \\wedge \\vec{AC}$.\n      $\\vec{n} = \\begin{vmatrix} \\vec{i} & \\vec{j} & \\vec{k} \\\\ -2 & 2 & -2 \\\\ 2 & 1 & 2 \\end{vmatrix} = \\vec{i}((2)(2) - (-2)(1)) - \\vec{j}((-2)(2) - (-2)(2)) + \\vec{k}((-2)(1) - (2)(2))$\n      $\\vec{n} = \\vec{i}(4 - (-2)) - \\vec{j}(-4 - (-4)) + \\vec{k}(-2 - 4) = \\vec{i}(6) - \\vec{j}(0) + \\vec{k}(-6) = (6, 0, -6)$.\n      On peut choisir un vecteur normal plus simple en divisant par 6 : $\\vec{n'} = (1, 0, -1)$.\n      L'équation cartésienne du plan $P$ est de la forme $1x + 0y - 1z + d = 0$, soit $x - z + d = 0$.\n      Comme le point $A(1, 0, 2)$ appartient au plan $P$, on a $1 - 2 + d = 0$, ce qui donne $d = 1$.\n      L'équation du plan $P$ est donc $x - z + 1 = 0$.\n\n2. Soit $S$ la sphère d'équation $x^2 + y^2 + z^2 - 2x - 4y + 2z - 10 = 0$.\n   a) Déterminer le centre $\\Omega$ et le rayon $R$ de la sphère $S$.\n      On réécrit l'équation de la sphère en complétant les carrés :\n      $(x^2 - 2x) + (y^2 - 4y) + (z^2 + 2z) - 10 = 0$\n      $(x - 1)^2 - 1 + (y - 2)^2 - 4 + (z + 1)^2 - 1 - 10 = 0$\n      $(x - 1)^2 + (y - 2)^2 + (z + 1)^2 = 1 + 4 + 1 + 10 = 16$.\n      Le centre de la sphère $S$ est $\\Omega(1, 2, -1)$ et son rayon est $R = \\sqrt{16} = 4$.\n\n   b) Calculer la distance du centre $\\Omega$ au plan $P$.\n      Le centre de la sphère est $\\Omega(1, 2, -1)$ et le plan $P$ a pour équation $x - z + 1 = 0$.\n      La distance $d(\\Omega, P)$ est donnée par la formule :\n      $d(\\Omega, P) = \\frac{|1(1) - 1(-1) + 1|}{\\sqrt{1^2 + 0^2 + (-1)^2}} = \\frac{|1 + 1 + 1|}{\\sqrt{1 + 1}} = \\frac{|3|}{\\sqrt{2}} = \\frac{3}{\\sqrt{2}} = \\frac{3\\sqrt{2}}{2}$.\n\n   c) Déterminer l'intersection de la sphère $S$ et du plan $P$. Préciser la nature et les éléments caractéristiques de cette intersection.\n      La distance du centre $\\Omega$ au plan $P$ est $d(\\Omega, P) = \\frac{3\\sqrt{2}}{2}$. Le rayon de la sphère est $R = 4$.\n      Comme $d(\\Omega, P) = \\frac{3\\sqrt{2}}{2} \\approx \\frac{3 \\times 1.414}{2} \\approx 2.121$, et $R=4$, on a $d(\\Omega, P) < R$.\n      L'intersection de la sphère $S$ et du plan $P$ est un cercle.\n      Le centre de ce cercle, noté $I$, est le projeté orthogonal de $\\Omega$ sur le plan $P$.\n      Le rayon de ce cercle, noté $r$, est donné par $r = \\sqrt{R^2 - d(\\Omega, P)^2}$.\n      $r^2 = R^2 - d(\\Omega, P)^2 = 4^2 - \\left(\\frac{3\\sqrt{2}}{2}\\right)^2 = 16 - \\frac{9 \\times 2}{4} = 16 - \\frac{18}{4} = 16 - \\frac{9}{2} = \\frac{32 - 9}{2} = \\frac{23}{2}$.\n      Donc, $r = \\sqrt{\\frac{23}{2}} = \\frac{\\sqrt{46}}{2}$.\n\n      Pour trouver le centre $I$, on cherche le point $I(x, y, z)$ tel que $\\vec{\\Omega I}$ est normal au plan $P$ et $I$ appartient au plan $P$.\n      Le vecteur normal au plan $P$ est $\\vec{n'} = (1, 0, -1)$.\n      La droite passant par $\\Omega$ et normal au plan $P$ a pour équation paramétrique :\n      $x = 1 + t$\n      $y = 2 + 0t = 2$\n      $z = -1 - t$\n      Le point $I$ est l'intersection de cette droite avec le plan $P$ ($x - z + 1 = 0$).\n      On remplace les coordonnées de la droite dans l'équation du plan :\n      $(1 + t) - (-1 - t) + 1 = 0$\n      $1 + t + 1 + t + 1 = 0$\n      $2t + 3 = 0 \\Rightarrow t = -\\frac{3}{2}$.\n      Les coordonnées du centre $I$ sont :\n      $x_I = 1 + (-\\frac{3}{2}) = 1 - \\frac{3}{2} = -\\frac{1}{2}$.\n      $y_I = 2$.\n      $z_I = -1 - (-\\frac{3}{2}) = -1 + \\frac{3}{2} = \\frac{1}{2}$.\n      Donc, le centre de l'intersection est $I(-\\frac{1}{2}, 2, \\frac{1}{2})$.\n      L'intersection est un cercle de centre $I(-\\frac{1}{2}, 2, \\frac{1}{2})$ et de rayon $r = \\frac{\\sqrt{46}}{2}$.\n\n3. Soit $D$ le point de coordonnées $(1, 1, 1)$.\n   a) Vérifier que $D$ appartient au plan $P$.\n      L'équation du plan $P$ est $x - z + 1 = 0$.\n      Pour le point $D(1, 1, 1)$, on a : $1 - 1 + 1 = 1$.\n      Comme $1 \\neq 0$, le point $D(1, 1, 1)$ n'appartient pas au plan $P$.\n      *Modification de l'énoncé pour que le point D appartienne au plan P.*\n      Reprenons avec un point $D$ qui appartient au plan $P$. Si $D$ doit être $(1, 1, z_D)$ et appartenir à $x-z+1=0$, alors $1-z_D+1=0 \\Rightarrow z_D=2$.\n      Soit $D$ le point de coordonnées $(1, 1, 2)$.\n\n   a) Vérifier que $D$ appartient au plan",
+    "final_answer": "",
+    "tags": [],
+    "model": "gemini-2.5-flash-lite",
+    "created_at": "2026-02-19T22:52:48.333911Z"
+  },
+  {
+    "section": "Mathématiques",
+    "topic": "Analyse",
+    "exercise": "Soit la fonction $f$ définie sur l'intervalle $[0, 2]$ par $f(x) = \\frac{x^2 - 2x + 1}{x+1}$.\nOn note $(C)$ la courbe représentative de $f$ dans un repère orthonormé $(O, \\vec{i}, \\vec{j})$.\n\n1. Calculer la dérivée $f'(x)$ de la fonction $f$ sur l'intervalle $[0, 2]$.\n2. Étudier le signe de $f'(x)$ sur l'intervalle $[0, 2]$.\n3. Dresser le tableau de variation complet de la fonction $f$ sur l'intervalle $[0, 2]$.\n4. Déterminer l'équation de la droite $T$ tangente à la courbe $(C)$ au point d'abscisse $x=1$.\n5. Calculer l'aire $\\mathcal{A}$ de la région délimitée par la courbe $(C)$, l'axe des abscisses, et les droites d'équations $x=0$ et $x=2$.",
+    "solution": "1. Pour calculer la dérivée $f'(x)$, nous utilisons la règle de dérivation d'un quotient : $(\\frac{u}{v})' = \\frac{u'v - uv'}{v^2}$.\nIci, $u(x) = x^2 - 2x + 1$ et $v(x) = x+1$.\nDonc, $u'(x) = 2x - 2$ et $v'(x) = 1$.\nAlors, $f'(x) = \\frac{(2x - 2)(x+1) - (x^2 - 2x + 1)(1)}{(x+1)^2}$.\nDéveloppons le numérateur :\n$(2x - 2)(x+1) = 2x^2 + 2x - 2x - 2 = 2x^2 - 2$.\n$(x^2 - 2x + 1)(1) = x^2 - 2x + 1$.\nLe numérateur devient : $(2x^2 - 2) - (x^2 - 2x + 1) = 2x^2 - 2 - x^2 + 2x - 1 = x^2 + 2x - 3$.\nDonc, $f'(x) = \\frac{x^2 + 2x - 3}{(x+1)^2}$.\n\n2. Pour étudier le signe de $f'(x)$ sur $[0, 2]$, nous analysons le signe du numérateur $x^2 + 2x - 3$ et du dénominateur $(x+1)^2$.\nLe dénominateur $(x+1)^2$ est toujours strictement positif pour $x \\in [0, 2]$ puisque $x+1 > 0$.\nNous devons donc étudier le signe du trinôme $P(x) = x^2 + 2x - 3$.\nLes racines de $P(x)$ sont données par $\\Delta = b^2 - 4ac = 2^2 - 4(1)(-3) = 4 + 12 = 16$.\nLes racines sont $x_1 = \\frac{-2 - \\sqrt{16}}{2(1)} = \\frac{-2 - 4}{2} = -3$ et $x_2 = \\frac{-2 + \\sqrt{16}}{2(1)} = \\frac{-2 + 4}{2} = 1$.\nLe trinôme $x^2 + 2x - 3$ est du signe de $a=1$ (positif) à l'extérieur de ses racines, et du signe opposé ($a=-1$) entre ses racines.\nSur l'intervalle $[0, 2]$ :\n- Pour $x \\in [0, 1[$, $x$ est entre les racines $-3$ et $1$, donc $x^2 + 2x - 3 < 0$. Par conséquent, $f'(x) < 0$.\n- Pour $x = 1$, $x^2 + 2x - 3 = 0$, donc $f'(1) = 0$.\n- Pour $x \\in ]1, 2]$, $x$ est supérieur à la racine $1$, donc $x^2 + 2x - 3 > 0$. Par conséquent, $f'(x) > 0$.\n\n3. Tableau de variation de $f$ sur $[0, 2]$ :\n| $x$      | 0       | 1       | 2       |\n|----------|---------|---------|---------|\n| $f'(x)$  |    -    | 0   |    +    |\n| $f(x)$   | $f(0)$  | $\\searrow$ | $f(1)$  | $\\nearrow$ | $f(2)$  |\n\nCalcul des valeurs aux bornes et au minimum :\n$f(0) = \\frac{0^2 - 2(0) + 1}{0+1} = \\frac{1}{1} = 1$.\n$f(1) = \\frac{1^2 - 2(1) + 1}{1+1} = \\frac{1 - 2 + 1}{2} = \\frac{0}{2} = 0$.\n$f(2) = \\frac{2^2 - 2(2) + 1}{2+1} = \\frac{4 - 4 + 1}{3} = \\frac{1}{3}$.\n\nTableau de variation complet :\n| $x$      | 0       | 1       | 2       |\n|----------|---------|---------|---------|\n| $f'(x)$  |    -    | 0   |    +    |\n| $f(x)$   | $1$     | $\\searrow$ | $0$     | $\\nearrow$ | $1/3$   |\n\n4. L'équation de la tangente $T$ à la courbe $(C)$ au point d'abscisse $x=1$ est donnée par $y = f'(1)(x-1) + f(1)$.\nNous avons déjà calculé $f'(1) = 0$ et $f(1) = 0$.\nDonc, l'équation de la tangente $T$ est $y = 0(x-1) + 0$, ce qui donne $y = 0$.\n\n5. L'aire $\\mathcal{A}$ est donnée par l'intégrale définie : $\\mathcal{A} = \\int_{0}^{2} f(x) dx = \\int_{0}^{2} \\frac{x^2 - 2x + 1}{x+1} dx$.\nPour calculer cette intégrale, nous pouvons effectuer une division euclidienne ou une décomposition.\nUtilisons la division euclidienne de $x^2 - 2x + 1$ par $x+1$:\n$x^2 - 2x + 1 = (x-3)(x+1) + 4$.\nDonc, $f(x) = \\frac{(x-3)(x+1) + 4}{x+1} = x-3 + \\frac{4}{x+1}$.\n\nMaintenant, calculons l'intégrale :\n$\\mathcal{A} = \\int_{0}^{2} (x - 3 + \\frac{4}{x+1}) dx$.\n$\\mathcal{A} = \\left[ \\frac{x^2}{2} - 3x + 4 \\ln|x+1| \\right]_{0}^{2}$.\nÉvaluons l'expression aux bornes :\nAux bornes supérieures ($x=2$) : $\\frac{2^2}{2} - 3(2) + 4 \\ln|2+1| = \\frac{4}{2} - 6 + 4 \\ln(3) = 2 - 6 + 4 \\ln(3) = -4 + 4 \\ln(3)$.\nAux bornes inférieures ($x=0$) : $\\frac{0^2}{2} - 3(0) + 4 \\ln|0+1| = 0 - 0 + 4 \\ln(1) = 0$.\nDonc, $\\mathcal{A} = (-4 + 4 \\ln(3)) - 0 = -4 + 4 \\ln(3)$.\n\nFINAL_ANSWER:\n[diff( (x**2 - 2*x + 1)/(x+1), x), solve(x**2 + 2*x - 3, x), [1, 0, 1/3], Eq(y, 0), integrate( (x**2 - 2*x + 1)/(x+1), (x, 0, 2)) ]\nCHECK:\n[Eq(diff( (x**2 - 2*x + 1)/(x+1), x), (x**2 + 2*x - 3)/(x+1)**2), Eq(x**2 + 2*x - 3, 0), Eq(f(0), 1), Eq(f(1), 0), Eq(f(2), 1/3), Eq(y, 0), Eq(integrate( (x**2 - 2*x + 1)/(x+1), (x, 0, 2)), -4 + 4*log(3))]",
+    "final_answer": "",
+    "tags": [],
+    "model": "gemini-2.5-flash-lite",
+    "created_at": "2026-02-19T23:51:04.057211Z"
+  },
+  {
+    "section": "Mathématiques",
+    "topic": "Nombres Complexes",
+    "exercise": "Dans le plan complexe muni d'un repère orthonormé direct $(O, \\vec{u}, \\vec{v})$, on considère les points $A$, $B$, $C$ d'affixes respectives $a=1+i$, $b=2+i$, $c=1+2i$. Soit $z$ l'affixe d'un point $M$ du plan.\n\n1.  a) Calculer les affixes des vecteurs $\\vec{AB}$ et $\\vec{AC}$.\n    b) Déterminer la nature du triangle $ABC$.\n\n2.  Soit $z'$ l'affixe du point $M'$ tel que le triangle $AMM'$ soit équilatéral direct.\n    a) Exprimer $z'$ en fonction de $z$.\n    b) En déduire l'affixe $z'_A$ du point $A'$ tel que le triangle $AA'A$ soit équilatéral direct, où $A$ est le point d'affixe $a=1+i$.\n\n3.  Soit $E$ le point d'affixe $e = 1+i\\sqrt{3}$.\n    a) Exprimer $e$ sous forme exponentielle.\n    b) Soit $M$ un point d'affixe $z$. On note $M'$ le point d'affixe $z'$ tel que le triangle $AMM'$ soit équilatéral direct. Montrer que l'affixe $z''$ du point $M''$ tel que $AM''M$ soit équilatéral direct est donnée par $z'' = a + (z-a)e^{-i\\frac{\\pi}{3}}$.\n\n4.  On considère le point $P$ d'affixe $p = 3+i$.\n    a) Calculer l'affixe $p'$ du point $P'$ tel que $APP'$ soit équilatéral direct.\n    b) Calculer l'affixe $p''$ du point $P''$ tel que $APP''$ soit équilatéral direct.",
+    "solution": "1.  a) L'affixe du vecteur $\\vec{AB}$ est $b-a = (2+i) - (1+i) = 1$.\n    L'affixe du vecteur $\\vec{AC}$ est $c-a = (1+2i) - (1+i) = i$.\n\n    b) Pour déterminer la nature du triangle $ABC$, on calcule les longueurs des côtés $AB$ et $AC$ et l'angle entre les vecteurs $\\vec{AB}$ et $\\vec{AC}$.\n    La longueur $AB = |b-a| = |1| = 1$.\n    La longueur $AC = |c-a| = |i| = 1$.\n    Le rapport $\\frac{c-a}{b-a} = \\frac{i}{1} = i$. L'argument de ce rapport est $\\arg(i) = \\frac{\\pi}{2}$.\n    Puisque $AB = AC$ et que l'angle $(\\vec{AB}, \\vec{AC})$ est égal à $\\frac{\\pi}{2}$, le triangle $ABC$ est un triangle rectangle isocèle en $A$.\n\n2.  Soit $z'$ l'affixe du point $M'$ tel que le triangle $AMM'$ soit équilatéral direct.\n    a) Pour qu'un triangle $AMM'$ soit équilatéral direct, l'affixe $z'$ de $M'$ doit satisfaire la relation :\n    $\\frac{z'-a}{z-a} = e^{i\\frac{\\pi}{3}} = \\cos(\\frac{\\pi}{3}) + i\\sin(\\frac{\\pi}{3}) = \\frac{1}{2} + i\\frac{\\sqrt{3}}{2}$.\n    Donc, $z' - a = (z-a)(\\frac{1}{2} + i\\frac{\\sqrt{3}}{2})$.\n    $z' = a + (z-a)(\\frac{1}{2} + i\\frac{\\sqrt{3}}{2})$.\n\n    b) Pour trouver l'affixe $z'_A$ du point $A'$ tel que le triangle $AA'A$ soit équilatéral direct, on remplace $z$ par $a$ dans la formule précédente. Cependant, cette question est mal posée car si $z=a$, alors $M=A$, et on ne peut pas former un triangle $AMM'$ avec $M=A$. En supposant que la question demande l'affixe $a'$ du point $A'$ tel que le triangle $AA'A$ soit équilatéral direct et que $A'$ est construit à partir du point $A$ d'affixe $a=1+i$. Si l'on considère que le triangle est $AA'B$ équilatéral direct, où $B$ est un autre point. Reformulons la question pour qu'elle ait un sens : Soit $A$ le point d'affixe $a=1+i$. Soit $A'$ le point d'affixe $a'$ tel que le triangle $AA'B$ soit équilatéral direct, où $B$ est un point d'affixe $b$. La question étant formulée comme \"le triangle $AA'A$ soit équilatéral direct\", cela implique que deux sommets sont identiques, ce qui n'est pas possible pour un triangle.\n\n    Si l'on interprète la question comme : \"Soit $A$ le point d'affixe $a=1+i$. Soit $A'$ le point d'affixe $a'$ tel que le triangle $AA'X$ soit équilatéral direct, où $X$ est un autre point d'affixe $x$.\" Si on suppose que la question voulait dire que le triangle est formé par $A$ et un autre point $X$, et $A'$ est le troisième sommet tel que $AA'X$ soit équilatéral direct.\n\n    Reprenons la question 2.b) telle qu'elle est écrite : \"Soit $A$ le point d'affixe $a=1+i$. Montrer que l'affixe $z'_A$ du point $A'$ tel que le triangle $AA'A$ soit équilatéral direct.\" Cela n'a pas de sens géométrique. Si l'on suppose que la question voulait construire un triangle équilatéral direct à partir d'un segment donné. Soit le segment $[AA]$ d'affixe $a$. Si l'on considère un segment de référence, par exemple $[O, A]$. Soit $A'$ tel que $OA'A$ soit équilatéral direct. Alors $a' = a + (0-a)e^{i\\frac{\\pi}{3}} = a(1 - e^{i\\frac{\\pi}{3}})$.\n\n    Si l'on interprète la question comme : étant donné le point $A$ d'affixe $a=1+i$, on veut construire un triangle équilatéral direct dont $A$ est un sommet. Si l'on considère que le triangle est $AA'B$ où $B$ est un autre point. La formulation \"le triangle $AA'A$\" est problématique.\n\n    Si l'on suppose que la question voulait dire : Soit $A$ le point d'affixe $a=1+i$. Soit $A'$ le point d'affixe $a'$ tel que le triangle $AA'X$ soit équilatéral direct, où $X$ est un point d'affixe $x$. Si l'on prend $X=A$, alors $z=a$. La formule de la question 2.a) devient $z'_A = a + (a-a)(\\frac{1}{2} + i\\frac{\\sqrt{3}}{2}) = a$. Cela signifie que $A'=A$, ce qui ne forme pas un triangle.\n\n    Il semble y avoir une erreur dans la formulation de la question 2.b). Si l'on suppose que la question voulait dire : \"Soit $A$ le point d'affixe $a=1+i$. Soit $A'$ le point d'affixe $a'$ tel que le triangle $OAA'$ soit équilatéral direct, où $O$ est l'origine.\"\n    Alors $a' = a + (0-a)e^{i\\frac{\\pi}{3}} = (1+i) + (-1-i)(\\frac{1}{2} + i\\frac{\\sqrt{3}}{2}) = (1+i) - (\\frac{1}{2} + i\\frac{\\sqrt{3}}{2} + i\\frac{1}{2} - \\frac{\\sqrt{3}}{2}) = (1+i) - (\\frac{1-\\sqrt{3}}{2} + i\\frac{1+\\sqrt{3}}{2}) = \\frac{2-1+\\sqrt{3}}{2} + i\\frac{2-1-\\sqrt{3}}{2} = \\frac{1+\\sqrt{3}}{2} + i\\frac{1-\\sqrt{3}}{2}$.\n\n    En l'absence de clarification, nous ne pouvons pas répondre rigoureusement à la question 2.b).\n\n3.  Soit $E$ le point d'affixe $e = 1+i\\sqrt{3}$.\n    a) Pour exprimer $e$ sous forme exponentielle, on calcule son module et son argument.\n    Module de $e$: $|e| = \\sqrt{1^2 + (\\sqrt{3})^2} = \\sqrt{1+3} = \\sqrt{4} = 2$.\n    Argument de $e$: $\\arg(e) = \\arctan(\\frac{\\sqrt{3}}{1}) = \\frac{\\pi}{3}$ (car $e$ est dans le premier quadrant).\n    Donc, $e = 2e^{i\\frac{\\pi}{3}}$.\n\n    b) Soit $M$ un point d'affixe $z$. On note $M'$ le point d'affixe $z'$ tel que le triangle $AMM'$ soit équilatéral direct. On a vu en 2.a) que $z' = a + (z-a)e^{i\\frac{\\pi}{3}}$.\n    Soit $M''$ le point d'affixe $z''$ tel que $AM''M$ soit équilatéral direct. Cela signifie que le triangle $AM''M$ est équilatéral direct. L'ordre des points est important. Si c'est $AM''M$, alors l'affixe $z''$ de $M''$ est donnée par :\n    $\\frac{z-a}{z''-a} = e^{i\\frac{\\pi}{3}}$.\n    Donc, $z'' - a = (z-a)e^{-i\\frac{\\pi}{3}}$.\n    $z'' = a + (z-a)e^{-i\\frac{\\pi}{3}}$.\n    Ceci correspond à la formule donnée dans la question.\n\n4.  On considère le point $P$ d'affixe $p = 3+i$.\n    a) Calculer l'affixe $p'$ du point $P'$ tel que $APP'$ soit équilatéral direct.\n    En utilisant la formule de la question 3.b) avec $z=p$ et $a=a$:\n    $p' = a + (p-a)e^{i\\frac{\\pi}{3}}$.\n    $p-a = (3+i) - (1+i) = 2$.\n    $p' = (1+i) + (2)(\\frac{1}{2} + i\\frac{\\sqrt{3}}{2}) = 1+i + 1 + i\\sqrt{3} = 2 + i(1+\\sqrt{3})$.\n\n    b) Calculer l'affixe $p''$ du point $P''$ tel que $APP''$ soit équilatéral direct.\n    En utilisant la formule de la question 3.b) avec $z=p$ et $a=a$, mais en considérant que le triangle est $AP''P$ (l'ordre des points dans la question 3.b) était $AM''M$).\n    Si le triangle est $APP''$ équilatéral direct, alors :\n    $\\frac{p''-a}{p-a} = e^{i\\frac{\\pi}{3}}$.\n    $p'' = a + (p-a)e^{i\\frac{\\pi}{3}} = (1+i) + ((3+i)-(1+i))e^{i\\frac{\\pi}{3}} = (1+i) + (2)(\\frac{1}{2} + i\\frac{\\sqrt{3}}{2}) = 1+i + 1 + i\\sqrt{3} = 2 + i(1+\\sqrt{3})$.\n\n    Si la question 4.b) demande l'affixe $p''$ tel que le triangle $AP''P$ soit équilatéral direct :\n    $\\frac{p-a}{p''-a} = e^{i\\frac{\\pi}{3}}$.\n    $p''-a = (p-a)e^{-i\\frac{\\pi}{3}}$.\n    $p'' = a + (p-a)e^{-i\\frac{\\pi}{3}} = (1+i) + ((3+i)-(1+i))e^{-i\\frac{\\pi}{3}} = (1+i) + (2)(\\frac{1}{2} - i\\frac{\\sqrt{",
+    "final_answer": "",
+    "tags": [],
+    "model": "gemini-2.5-flash-lite",
+    "created_at": "2026-02-19T23:52:32.278994Z"
+  },
+  {
+    "section": "Sciences de l'informatique",
+    "topic": "Statistiques",
+    "exercise": "Une entreprise fabrique des composants électroniques. Le coût de production journalier $C(x)$ (en milliers de dinars) pour la fabrication de $x$ milliers de composants est modélisé par la fonction $C(x) = 0,05x^2 - 0,4x + 1,8$ pour $x \\in [1, 10]$. Le prix de vente unitaire d'un composant est de 0,7 dinar. Le chiffre d'affaires journalier $R(x)$ (en milliers de dinars) pour la vente de $x$ milliers de composants est donc donné par $R(x) = 0,7x$. Le bénéfice journalier $B(x)$ (en milliers de dinars) est la différence entre le chiffre d'affaires et le coût de production, c'est-à-dire $B(x) = R(x) - C(x)$.\n\n1. Déterminer l'expression du bénéfice journalier $B(x)$ en fonction de $x$.\n2. Calculer le bénéfice pour la production et la vente de 5 milliers de composants.\n3. Étudier les variations de la fonction $B(x)$ sur l'intervalle $[1, 10]$ et déterminer le nombre de milliers de composants à produire et vendre pour maximiser le bénéfice journalier.\n4. Calculer le bénéfice maximal.",
+    "solution": "1. L'expression du bénéfice journalier $B(x)$ est donnée par :\n$B(x) = R(x) - C(x)$\n$B(x) = 0,7x - (0,05x^2 - 0,4x + 1,8)$\n$B(x) = 0,7x - 0,05x^2 + 0,4x - 1,8$\n$B(x) = -0,05x^2 + 1,1x - 1,8$\n\n2. Pour la production et la vente de 5 milliers de composants, on calcule $B(5)$:\n$B(5) = -0,05(5)^2 + 1,1(5) - 1,8$\n$B(5) = -0,05(25) + 5,5 - 1,8$\n$B(5) = -1,25 + 5,5 - 1,8$\n$B(5) = 4,25 - 1,8$\n$B(5) = 2,45$\nLe bénéfice pour la production et la vente de 5 milliers de composants est de 2,45 milliers de dinars, soit 2450 dinars.\n\n3. Pour étudier les variations de la fonction $B(x)$, on calcule sa dérivée :\n$B'(x) = \\frac{d}{dx}(-0,05x^2 + 1,1x - 1,8)$\n$B'(x) = -0,05(2x) + 1,1$\n$B'(x) = -0,1x + 1,1$\n\nPour trouver le signe de $B'(x)$, on résout $B'(x) = 0$:\n$-0,1x + 1,1 = 0$\n$-0,1x = -1,1$\n$x = \\frac{-1,1}{-0,1}$\n$x = 11$\n\nLe sommet de la parabole représentant $B(x)$ est en $x=11$. La fonction $B(x)$ est une parabole ouverte vers le bas (car le coefficient de $x^2$ est négatif). Sur l'intervalle $[1, 10]$, la dérivée $B'(x)$ est positive :\nPour $x \\in [1, 10]$, $0,1x \\le 1$, donc $-0,1x \\ge -1$.\n$B'(x) = -0,1x + 1,1 \\ge -1 + 1,1 = 0,1 > 0$.\nDonc, la fonction $B(x)$ est strictement croissante sur l'intervalle $[1, 10]$.\n\nLe nombre de milliers de composants à produire et vendre pour maximiser le bénéfice journalier sur l'intervalle $[1, 10]$ est la valeur maximale de $x$ dans cet intervalle, soit $x=10$.\n\n4. Le bénéfice maximal est atteint pour $x=10$. On calcule $B(10)$:\n$B(10) = -0,05(10)^2 + 1,1(10) - 1,8$\n$B(10) = -0,05(100) + 11 - 1,8$\n$B(10) = -5 + 11 - 1,8$\n$B(10) = 6 - 1,8$\n$B(10) = 4,2$\nLe bénéfice maximal est de 4,2 milliers de dinars, soit 4200 dinars.\n\nFINAL_ANSWER:\n[Eq(-0.05*x**2 + 1.1*x - 1.8, B), 2.45, 10, 4.2]\nCHECK:\nEq(-0.1*x + 1.1, 0)",
+    "final_answer": "",
+    "tags": [],
+    "model": "gemini-2.5-flash-lite",
+    "created_at": "2026-02-19T23:53:55.648681Z"
   }
 ]

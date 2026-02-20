@@ -42,32 +42,26 @@ def build_generation_prompt(section: str, topic: str, retrieved: List[RetrievalR
         f"<solution détaillée étape par étape>\n\n"
         f"Voici des exemples de style à imiter:\n"
         f"{examples_block}\n"
+        f"FORMAT STRICT (obligatoire):\n"
+        f"EXERCICE:\n<énoncé complet>\n\n"
+        f"SOLUTION:\n<solution détaillée étape par étape>\n\n"
+        f"FINAL_ANSWER:\n<réponse finale machine-readable (SymPy), ex: 2*x+1, {{x:2, y:3}}, [1,2,3]>\n"
+        f"CHECK:\n<OPTIONNEL: une relation à vérifier si pertinent, ex: Eq(x**2-4,0)>\n\n"
+        f"Règles pour FINAL_ANSWER:\n"
+        f"- Utiliser la syntaxe SymPy: **, sqrt(), exp(), log(), sin(), cos(), pi\n"
+        f"- Pas de phrases, pas de LaTeX, uniquement expression/valeurs.\n"
+        f"- Si plusieurs réponses: liste Python [..] ou dict {{variable: valeur}}.\n\n"
+
     )
 
 
-def generate_exercise(llm, system_prompt: str, section: str, topic: str, retrieved):
-    # Build your user prompt the same way you already do
-    examples_txt = ""
-    if retrieved:
-        # If your retrieved items are objects with .exercise.enonce/solution
-        # adjust if your structure is different
-        for r in retrieved:
-            ex = getattr(r.exercise, "enonce", "")
-            sol = getattr(r.exercise, "solution", "")
-            examples_txt += f"\n---\nEXEMPLE:\n{ex}\nSOLUTION:\n{sol}\n"
+def generate_exercise(llm: LLMClient, system_prompt: str, section: str, topic: str, retrieved: List[RetrievalResult]) -> str:
+    user_prompt = build_generation_prompt(section=section, topic=topic, retrieved=retrieved)
 
-    user_prompt = (
-        f"SECTION: {section}\n"
-        f"TOPIC: {topic}\n\n"
-        "Generate ONE new exercise for the Tunisian Baccalaureate.\n"
-        "Use the style of the examples if provided.\n\n"
-        "Return EXACTLY this format:\n"
-        "EXERCICE:\n<statement>\n\n"
-        "SOLUTION:\n<detailed solution>\n\n"
-        "EXAMPLES (if any):"
-        f"{examples_txt}\n"
-    )
+    out = llm.generate(system_prompt=system_prompt, context="", user_prompt=user_prompt)
 
-    # IMPORTANT: llm.generate returns a STRING
-    out_text = llm.generate(system_prompt=system_prompt, context="", user_prompt=user_prompt)
-    return (out_text or "").strip()
+    # IMPORTANT: selon ton llm_client, out peut être un objet ou une string
+    # Si c'est un objet: out.text ; si c'est une string: out
+    text = getattr(out, "text", out)
+    return (text or "").strip()
+

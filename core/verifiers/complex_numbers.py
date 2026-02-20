@@ -1,0 +1,39 @@
+from __future__ import annotations
+import sympy as sp
+from core.verify_report import VerifyReport
+from core.verifiers.base import BaseVerifier
+
+class ComplexNumbersVerifier(BaseVerifier):
+    name = "complex_numbers"
+
+    def can_handle(self, topic, enonce, solution, final_answer, check):
+        t = (topic or "").lower()
+        return ("complex" in t or "affixe" in t) and (final_answer is not None)
+
+    def verify(self, topic, enonce, solution, final_answer, check):
+        rep = VerifyReport(ok=True, kind="mixed", summary="Vérification Nombres complexes")
+
+        try:
+            ans = sp.sympify(final_answer)
+            rep.add("parse.final_answer", True, "FINAL_ANSWER parsé")
+        except Exception as e:
+            rep.add("parse.final_answer", False, f"FINAL_ANSWER non parsable: {e}")
+            rep.ok = False
+            return rep
+
+        if check:
+            try:
+                ck = sp.sympify(check)
+                rep.add("parse.check", True, "CHECK parsé")
+                if isinstance(ck, sp.Equality):
+                    ok = sp.simplify(ck.lhs - ck.rhs) == 0
+                    rep.add("symbolic.check_eq", ok, "CHECK Eq vérifiée")
+                else:
+                    rep.add("symbolic.check_eq", True, "CHECK non Eq — skip")
+            except Exception:
+                rep.add("parse.check", False, "CHECK non parsable")
+        else:
+            rep.add("parse.check", True, "CHECK absent (OK)")
+
+        rep.ok = all(item.ok for item in rep.items)
+        return rep

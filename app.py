@@ -2,7 +2,7 @@ import os
 import re
 import base64
 import streamlit as st
-
+from core.verify_engine import verify
 from generator.store_generated import load_generated, append_generated
 from core.auto_verify import verify_by_topic
 
@@ -308,6 +308,9 @@ with col1:
 
                 s = (out_text or "").strip()
                 # parse after "SOLUTION:" if present
+                report = verify_by_topic(topic, st.session_state.exercise_enonce, st.session_state.exercise_solution)
+                st.session_state.verify_report = report
+
                 if "SOLUTION" in s.upper() and ":" in s:
                     st.session_state.exercise_solution = s.split(":", 1)[-1].strip()
                 else:
@@ -359,12 +362,17 @@ with col1:
                 st.cache_data.clear()  # so next run includes new items
                 st.success("Exercice enregistré dans la mémoire ✅")
 
-            # 4) Verification
-            report = verify_by_topic(topic, st.session_state.exercise_enonce, st.session_state.exercise_solution)
-            st.session_state.verify_report = report
-            rep = st.session_state.get("verify_report", None)
-            if rep:
-                (st.success if rep.ok else st.warning)(f"Vérification ({rep.kind}) : {rep.message}")
+                report = verify(topic, st.session_state.exercise_enonce, st.session_state.exercise_solution)
+                st.session_state.verify_report = report
+
+                if report.ok:
+                 st.success(report.summary)
+                else:
+                 st.warning(report.summary)
+
+                with st.expander("Détails vérification"):
+                 for it in report.items:
+                  st.write(("✅" if it.ok else "❌"), it.name, "—", it.message)
 
 with col2:
     st.markdown("### 💬 Discussion avec le tuteur (scaffolding)")
@@ -391,4 +399,17 @@ with col2:
 
             out_text = llm.generate(system_prompt=system_prompt, context="", user_prompt=tutor_user_prompt)
             st.session_state.chat_history.append(("assistant", out_text))
+            if "FINAL_ANSWER" in (out_text or "") or "CHECK" in (out_text or ""):
+             report = verify(topic, st.session_state.exercise_enonce, st.session_state.exercise_solution)
+             st.session_state.verify_report = report
+
+            if report.ok:
+               st.success(report.summary)
+            else:
+               st.warning(report.summary)
+
+            with st.expander("Détails vérification"):
+             for it in report.items:
+              st.write(("✅" if it.ok else "❌"), it.name, "—", it.message)
+
             st.rerun()
