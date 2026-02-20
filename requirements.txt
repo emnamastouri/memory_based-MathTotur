@@ -71,7 +71,7 @@ pandas==2.3.3
 pdfminer.six==20260107
 pillow==12.1.0
 posthog==5.4.0
-protobuf==6.33.5
+protobuf>=4.21.6,<6
 pyarrow==23.0.0
 pybase64==1.4.3
 pycparser==3.0
@@ -127,4 +127,4 @@ watchfiles==1.1.1
 websocket-client==1.9.0
 websockets==16.0
 zipp==3.23.0
-google-generativeai>=0.7.0
+google-generativeai==0.8.6
