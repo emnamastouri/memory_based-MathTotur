@@ -5,7 +5,7 @@ import streamlit as st
 from core.verify_engine import verify
 from generator.store_generated import load_generated, append_generated
 from core.auto_verify import verify_by_topic
-
+from core.verify_engine import verify
 from generator.data_loader import add_generated_exercise, load_exercises
 from generator.retriever import filter_pool, retrieve_similar
 from generator.exercise_generator import generate_exercise
@@ -364,15 +364,15 @@ with col1:
 
                 report = verify(topic, st.session_state.exercise_enonce, st.session_state.exercise_solution)
                 st.session_state.verify_report = report
-
                 if report.ok:
-                 st.success(report.summary)
+                    st.success(report.summary)
                 else:
-                 st.warning(report.summary)
+                    st.warning(report.summary)
 
                 with st.expander("Détails vérification"):
                  for it in report.items:
                   st.write(("✅" if it.ok else "❌"), it.name, "—", it.message)
+                  st.json(report.details)
 
 with col2:
     st.markdown("### 💬 Discussion avec le tuteur (scaffolding)")
@@ -400,16 +400,18 @@ with col2:
             out_text = llm.generate(system_prompt=system_prompt, context="", user_prompt=tutor_user_prompt)
             st.session_state.chat_history.append(("assistant", out_text))
             if "FINAL_ANSWER" in (out_text or "") or "CHECK" in (out_text or ""):
-             report = verify(topic, st.session_state.exercise_enonce, st.session_state.exercise_solution)
-             st.session_state.verify_report = report
 
-            if report.ok:
-               st.success(report.summary)
-            else:
-               st.warning(report.summary)
 
-            with st.expander("Détails vérification"):
-             for it in report.items:
-              st.write(("✅" if it.ok else "❌"), it.name, "—", it.message)
+                report = verify(topic, st.session_state.exercise_enonce, st.session_state.exercise_solution)
+                st.session_state.verify_report = report
+                if report.ok:
+                    st.success(report.summary)
+                else:
+                    st.warning(report.summary)
+
+                with st.expander("Détails vérification"):
+                 for it in report.items:
+                  st.write(("✅" if it.ok else "❌"), it.name, "—", it.message)
+                  st.json(report.details)
 
             st.rerun()
