@@ -121,18 +121,27 @@ class AlgebraEquationsVerifier(BaseVerifier):
     name = "algebra_equations"
 
     def can_handle(self, topic_or_directive, enonce, solution, final_answer, check):
-        # Prefer directive-driven activation
+        """
+        IMPORTANT:
+        Do NOT claim all Eq(...) globally, otherwise this verifier hijacks Complex/LinearAlgebra checks.
+        Only handle:
+          - SYSTEM directives, OR
+          - Eq(...) when the topic indicates equations/systems.
+        """
+        t = (topic_or_directive or "").lower()
+
+        # 1) Directive-driven activation
         if check:
             head = check.strip().split(";", 1)[0].strip().upper()
             if head == "SYSTEM":
                 return True
-            if _is_eq_string(check.strip()):
-                return True
 
-        # Fallback topic keywords
-        t = (topic_or_directive or "").lower()
-        return any(k in t for k in ["équation", "equation", "système", "systeme", "arithmétique", "arithmetique"])
+        # 2) Topic-driven activation (equations/systems only)
+        topic_is_equation = any(k in t for k in ["équation", "equation", "système", "systeme", "arithmétique", "arithmetique"])
+        if topic_is_equation and check and _is_eq_string(check.strip()):
+            return True
 
+        return topic_is_equation
     def verify(self, topic, enonce, solution, final_answer, check):
         rep = VerifyReport(ok=True, kind="mixed", summary="Vérification Algèbre (Eq / Système)")
 

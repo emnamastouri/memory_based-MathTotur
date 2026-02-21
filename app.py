@@ -2,10 +2,12 @@ import os
 import re
 import base64
 import streamlit as st
+
 from core.verify_engine import verify
+from core.parse_blocks import extract_blocks, get_final_answer
+from core.verify_fix import auto_fix_solution_for_verify
+
 from generator.store_generated import load_generated, append_generated
-from core.auto_verify import verify_by_topic
-from core.verify_engine import verify
 from generator.data_loader import add_generated_exercise, load_exercises
 from generator.retriever import filter_pool, retrieve_similar
 from generator.exercise_generator import generate_exercise
@@ -13,9 +15,11 @@ from memory.embedder import Embedder
 from core.tutor_policy import build_system_prompt
 from core.llm_client import LLMClient
 
-DB_PATH  = "data/fine-tuning-database.json"
+
+DB_PATH = "data/fine-tuning-database.json"
 GEN_PATH = "data/generated_exercises.jsonl"
 LOGO_PATH = "assets/logo.png"
+
 MODEL_CHOICES = {
     "Gemini 3 Flash (rapide)": "gemini-3-flash",
     "Gemini 3 Pro (meilleur raisonnement)": "gemini-3-pro",
@@ -38,20 +42,14 @@ st.set_page_config(page_title="MathTutorAI — Générateur d'exercices", layout
 # UI: Background logo (flou)
 # ----------------------------
 def inject_blurred_logo_background(logo_path: str):
-    """
-    Adds a blurred, semi-transparent background logo.
-    Works best if the logo is a PNG with transparent background.
-    """
     if not os.path.exists(logo_path):
         return
-
     try:
         with open(logo_path, "rb") as f:
             b64 = base64.b64encode(f.read()).decode("utf-8")
 
         css = f"""
         <style>
-        /* Put a blurred logo behind everything */
         .stApp {{
             position: relative;
         }}
@@ -63,20 +61,16 @@ def inject_blurred_logo_background(logo_path: str):
             background-repeat: no-repeat;
             background-position: center;
             background-size: min(620px, 70vw);
-            opacity: 0.30;           /* adjust visibility */
-            filter: blur(1px);       /* blur amount */
+            opacity: 0.30;
+            filter: blur(1px);
             transform: scale(1.05);
             z-index: 0;
             pointer-events: none;
         }}
-
-        /* Make content appear above background */
         .stApp > header, .stApp > div {{
             position: relative;
             z-index: 1;
         }}
-
-        /* Slightly improve readability on top of background */
         div[data-testid="stSidebar"] {{
             background: rgba(15, 23, 42, 0.45);
             backdrop-filter: blur(6px);
@@ -85,7 +79,6 @@ def inject_blurred_logo_background(logo_path: str):
         """
         st.markdown(css, unsafe_allow_html=True)
     except Exception:
-        # If anything fails, just skip background
         return
 
 
@@ -94,15 +87,16 @@ inject_blurred_logo_background(LOGO_PATH)
 st.title("MathTutorAI — Génération d'exercices (Bac Tunisie)")
 st.caption("Interface en français • Sélectionnez une section et un chapitre, puis générez un exercice.")
 
+
 # ----------------------------
 # Helpers
 # ----------------------------
 def get_api_key() -> str:
-    # 1) env var (never crashes)
-    k = os.getenv("GEMINI_API_KEY", "").strip()  or st.secrets["GEMINI_API_KEY"]
+    # env var first
+    k = os.getenv("GEMINI_API_KEY", "").strip()
     if k:
         return k
-    # 2) Streamlit secrets (can raise if no secrets file exists)
+    # streamlit secrets
     try:
         return str(st.secrets.get("GEMINI_API_KEY", "")).strip()
     except Exception:
@@ -155,12 +149,61 @@ def parse_exercise_solution(gen_text: str) -> tuple[str, str]:
     return ex, ""
 
 
+def build_solution_blocks(enonce: str, raw_solution: str) -> str:
+    """
+    Ensure we have strict blocks for parse_blocks + verification engine:
+    EXERCICE:
+    ...
+    SOLUTION:
+    ...
+    FINAL_ANSWER:
+    ...
+    CHECK:
+    ...
+    """
+    enonce = (enonce or "").strip()
+    raw_solution = (raw_solution or "").strip()
+
+    # If already contains blocks, keep as is
+    blocks = extract_blocks(raw_solution)
+    if blocks and ("FINAL_ANSWER" in blocks or "CHECK" in blocks or "SOLUTION" in blocks):
+        # Make sure EXERCICE exists
+        if "EXERCICE" not in blocks:
+            blocks["EXERCICE"] = enonce
+        # Rebuild strict
+        parts = []
+        for h in ["EXERCICE", "SOLUTION", "FINAL_ANSWER", "CHECK"]:
+            if h in blocks and blocks[h].strip():
+                parts.append(f"{h}:\n{blocks[h].strip()}")
+        return "\n\n".join(parts).strip()
+
+    # Otherwise wrap as SOLUTION-only blocks (FINAL_ANSWER/CHECK empty for now)
+    return (
+        f"EXERCICE:\n{enonce}\n\n"
+        f"SOLUTION:\n{raw_solution}\n\n"
+        f"FINAL_ANSWER:\n\n"
+        f"CHECK:\n"
+    ).strip()
+
+
+def render_verification(rep):
+    st.markdown("### ✅ Vérification SymPy / Plugins")
+    if getattr(rep, "ok", False):
+        st.success(getattr(rep, "summary", "✔ Vérification OK"))
+    else:
+        st.error(getattr(rep, "summary", "❌ Problèmes détectés"))
+
+    with st.expander("Voir les détails de la vérification (SymPy)"):
+        if hasattr(rep, "items"):
+            for it in rep.items:
+                st.write(("✅" if it.ok else "❌"), it.name, "—", it.message)
+
+
 @st.cache_data(show_spinner=False)
 def load_db():
     base = load_exercises(DB_PATH)  # list[Exercise]
     gen = load_generated(GEN_PATH)  # list[dict]
 
-    # Convert generated dicts to Exercise-like objects (minimal)
     from generator.data_loader import Exercise
 
     gen_ex = []
@@ -199,11 +242,7 @@ with st.sidebar:
     st.divider()
     st.header("⚙️ Paramètres")
 
-    model_label = st.selectbox(
-        "Modèle Gemini",
-        options=list(MODEL_CHOICES.keys()),
-        index=0,
-    )
+    model_label = st.selectbox("Modèle Gemini", options=list(MODEL_CHOICES.keys()), index=0)
     model_name = MODEL_CHOICES[model_label]
 
     top_k = st.slider("Nombre d'exemples similaires (Top-K)", 1, 6, 3)
@@ -214,27 +253,39 @@ st.write(f"Taille du pool filtré : **{len(pool)}** exercices")
 
 embedder = Embedder()
 
-# session state init
-st.session_state.setdefault("retrieved", [])
-st.session_state.setdefault("generated_text", "")
+
+# ----------------------------
+# Session state
+# ----------------------------
 st.session_state.setdefault("exercise_enonce", "")
-st.session_state.setdefault("exercise_solution", "")
+st.session_state.setdefault("exercise_solution", "")          # what we display (solution text only)
+st.session_state.setdefault("solution_blocks", "")            # full blocks text (EXERCICE/SOLUTION/FINAL_ANSWER/CHECK)
+st.session_state.setdefault("verified_solution_blocks", "")   # blocks text that was actually verified
 st.session_state.setdefault("chat_history", [])
 st.session_state.setdefault("verify_report", None)
-st.session_state.setdefault("saved_current", False)  # prevent double-saving on reruns
+st.session_state.setdefault("saved_current", False)
+st.session_state.setdefault("retrieved", [])
 
+
+# ----------------------------
+# UI: Generate exercise
+# ----------------------------
 colA, colB = st.columns(2)
 
 with colA:
     if st.button("🧠 Générer un nouvel exercice"):
-        st.session_state.saved_current = False  # new exercise -> not saved yet
+        st.session_state.saved_current = False
+        st.session_state.verify_report = None
+        st.session_state.verified_solution_blocks = ""
+        st.session_state.solution_blocks = ""
+        st.session_state.exercise_solution = ""
+        st.session_state.chat_history = []
 
         retrieved = retrieve_similar(embedder=embedder, pool=pool, k=top_k)
         st.session_state.retrieved = retrieved
 
         llm = get_llm(model_name)
 
-        # IMPORTANT: generator system prompt (not tutor prompt)
         gen_system_prompt = (
             "Tu es un générateur d'exercices pour le Baccalauréat Tunisien. "
             "Retourne UNIQUEMENT le format demandé."
@@ -248,12 +299,12 @@ with colA:
             retrieved=retrieved,
         )
 
-        # store raw + parsed
         st.session_state.generated_text = gen_text
         ex, sol = parse_exercise_solution(gen_text)
+
         st.session_state.exercise_enonce = ex
-        st.session_state.exercise_solution = sol
-        st.session_state.chat_history = []  # reset chat for new exercise
+        st.session_state.exercise_solution = sol  # may be empty
+        st.session_state.solution_blocks = build_solution_blocks(ex, sol)
 
 with colB:
     st.markdown("### 📚 Exemples récupérés")
@@ -280,95 +331,134 @@ st.subheader("3) Choisir : Solution complète OU Discussion avec le tuteur")
 
 col1, col2 = st.columns(2)
 
+# ----------------------------
+# Solution + Verification
+# ----------------------------
 with col1:
     if st.button("✅ Afficher la solution complète"):
         if not st.session_state.exercise_enonce.strip():
             st.warning("Veuillez d'abord générer un exercice.")
         else:
-            # If solution missing, generate it on demand
-            if not st.session_state.exercise_solution.strip():
-                llm = get_llm(model_name)
+            llm = get_llm(model_name)
 
-                sol_prompt = (
-                    "Donne la SOLUTION complète et détaillée (étape par étape) de l'exercice suivant.\n\n"
-                    f"EXERCICE:\n{st.session_state.exercise_enonce}\n\n"
-                    "Réponds avec le format:\nSOLUTION:\n<...>"
-                )
+            # If blocks missing FINAL_ANSWER/CHECK, ask the model in strict format
+            sol_prompt = f"""
+Tu es un professeur de mathématiques.
 
-                out_text = llm.generate(
-                    system_prompt="Tu es un professeur de mathématiques. Retourne uniquement la solution.",
-                    context="",
-                    user_prompt=sol_prompt,
-                )
+Tu dois répondre STRICTEMENT avec 4 blocs EXACTS dans cet ordre.
+Règles CRITIQUES:
+- Les titres doivent être seuls sur leur ligne, exactement comme:
+  EXERCICE:
+  SOLUTION:
+  FINAL_ANSWER:
+  CHECK:
+- FINAL_ANSWER doit être court et parsable par SymPy (nombre, expression, dict, liste...).
+- CHECK doit être au format attendu par les verifiers:
+  - Équations / système: SYSTEM; Eq(...)
+  - Dérivée: DERIVATIVE; var=x; func=<expression>
+  - Intégrale: INTEGRAL; var=x; integrand=<expression>
+  - Limite: LIMIT; var=x; expr=<expression>; point=<valeur>
 
-                s = (out_text or "").strip()
-                # parse after "SOLUTION:" if present
-                report = verify_by_topic(topic, st.session_state.exercise_enonce, st.session_state.exercise_solution)
-                st.session_state.verify_report = report
+EXERCICE:
+{st.session_state.exercise_enonce}
 
-                if "SOLUTION" in s.upper() and ":" in s:
-                    st.session_state.exercise_solution = s.split(":", 1)[-1].strip()
-                else:
-                    st.session_state.exercise_solution = s
+SOLUTION:
+(donne une solution détaillée et pédagogique)
 
-            st.markdown("### SOLUTION")
-            st.write(st.session_state.exercise_solution)
+FINAL_ANSWER:
+(donne seulement la réponse finale)
 
-            # Save only once for this exercise (avoid duplicates on reruns)
-            if not st.session_state.saved_current:
-                # 1) Save to generated_exercises.jsonl
-                append_generated(
-                    GEN_PATH,
-                    {
-                        "id": f"gen_{len(load_generated(GEN_PATH)) + 1}",
-                        "section": section,
-                        "topic": topic,
-                        "enonce": st.session_state.exercise_enonce,
-                        "solution": st.session_state.exercise_solution,
-                        "model": model_name,
-                    },
-                )
+CHECK:
+(donne une seule ligne de check)
+""".strip()
 
-                # 2) Save to fine-tuning database
-                add_generated_exercise(
-                    DB_PATH,
-                    {
-                        "section": section,
-                        "topic": topic,
-                        "exercise": st.session_state.exercise_enonce,
-                        "solution": st.session_state.exercise_solution,
-                        "final_answer": "",
-                        "tags": [],
-                        "model": model_name,
-                    },
-                )
+            out_text = llm.generate(
+                system_prompt="Retourne uniquement les 4 blocs demandés, format strict.",
+                context="",
+                user_prompt=sol_prompt,
+            )
+            out_text = (out_text or "").replace("\r\n", "\n").strip()
 
-                # 3) Update embedder memory IF supported (won't crash if not)
-                if hasattr(embedder, "add_document"):
-                    try:
-                        embedder.add_document(
-                            text=st.session_state.exercise_enonce + "\n" + st.session_state.exercise_solution,
-                            metadata={"section": section, "topic": topic, "model": model_name},
-                        )
-                    except Exception:
-                        pass
+            # Store full blocks, and also store display solution
+            st.session_state.solution_blocks = out_text
+            blocks = extract_blocks(out_text)
+            st.session_state.exercise_solution = (blocks.get("SOLUTION", "") or "").strip()
 
-                st.session_state.saved_current = True
-                st.cache_data.clear()  # so next run includes new items
-                st.success("Exercice enregistré dans la mémoire ✅")
+            # ✅ Auto-fix + verify
+            fixed_enonce, fixed_blocks = auto_fix_solution_for_verify(
+                st.session_state.exercise_enonce,
+                st.session_state.solution_blocks
+            )
 
-                report = verify(topic, st.session_state.exercise_enonce, st.session_state.exercise_solution)
-                st.session_state.verify_report = report
-                if report.ok:
-                    st.success(report.summary)
-                else:
-                    st.warning(report.summary)
+            rep = verify(topic, fixed_enonce, fixed_blocks)
+            st.session_state.verify_report = rep
+            st.session_state.verified_solution_blocks = fixed_blocks
 
-                with st.expander("Détails vérification"):
-                 for it in report.items:
-                  st.write(("✅" if it.ok else "❌"), it.name, "—", it.message)
-                  st.json(report.details)
+    # Display solution if available
+    if st.session_state.exercise_solution.strip():
+        st.markdown("### SOLUTION")
+        st.write(st.session_state.exercise_solution)
+    else:
+        st.info("Cliquez sur **Afficher la solution complète** pour générer la correction.")
 
+    # Always show verification result if available
+    if st.session_state.get("verify_report") is not None:
+        render_verification(st.session_state.verify_report)
+
+        with st.expander("Voir le texte exact vérifié (après auto-fix)"):
+            st.code(st.session_state.get("verified_solution_blocks", ""), language="text")
+
+    # Save after verification (only once)
+    if st.session_state.exercise_enonce.strip() and st.session_state.exercise_solution.strip():
+        if st.session_state.get("verify_report") is not None and (not st.session_state.saved_current):
+            # Extract final_answer from verified blocks (best)
+            fa = get_final_answer(st.session_state.get("verified_solution_blocks", "")) or ""
+
+            append_generated(
+                GEN_PATH,
+                {
+                    "id": f"gen_{len(load_generated(GEN_PATH)) + 1}",
+                    "section": section,
+                    "topic": topic,
+                    "enonce": st.session_state.exercise_enonce,
+                    # store verified blocks (stronger for future debug)
+                    "solution": st.session_state.get("verified_solution_blocks", st.session_state.solution_blocks),
+                    "final_answer": fa,
+                    "model": model_name,
+                },
+            )
+
+            add_generated_exercise(
+                DB_PATH,
+                {
+                    "section": section,
+                    "topic": topic,
+                    "exercise": st.session_state.exercise_enonce,
+                    "solution": st.session_state.get("verified_solution_blocks", st.session_state.solution_blocks),
+                    "final_answer": fa,
+                    "tags": [],
+                    "model": model_name,
+                },
+            )
+
+            # Update embedder memory IF supported
+            if hasattr(embedder, "add_document"):
+                try:
+                    embedder.add_document(
+                        text=st.session_state.exercise_enonce + "\n" + st.session_state.exercise_solution,
+                        metadata={"section": section, "topic": topic, "model": model_name},
+                    )
+                except Exception:
+                    pass
+
+            st.session_state.saved_current = True
+            st.cache_data.clear()
+            st.success("Exercice enregistré dans la mémoire ✅")
+
+
+# ----------------------------
+# Tutor chat
+# ----------------------------
 with col2:
     st.markdown("### 💬 Discussion avec le tuteur (scaffolding)")
     if not st.session_state.exercise_enonce.strip():
@@ -394,19 +484,5 @@ with col2:
 
             out_text = llm.generate(system_prompt=system_prompt, context="", user_prompt=tutor_user_prompt)
             st.session_state.chat_history.append(("assistant", out_text))
-            if "FINAL_ANSWER" in (out_text or "") or "CHECK" in (out_text or ""):
-
-
-                report = verify(topic, st.session_state.exercise_enonce, st.session_state.exercise_solution)
-                st.session_state.verify_report = report
-                if report.ok:
-                    st.success(report.summary)
-                else:
-                    st.warning(report.summary)
-
-                with st.expander("Détails vérification"):
-                 for it in report.items:
-                  st.write(("✅" if it.ok else "❌"), it.name, "—", it.message)
-                  st.json(report.details)
 
             st.rerun()
