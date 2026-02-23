@@ -18,7 +18,7 @@ from core.llm_client import LLMClient
 
 DB_PATH = "data/fine-tuning-database.json"
 GEN_PATH = "data/generated_exercises.jsonl"
-LOGO_PATH = "assets/logo.png"
+LOGO_PATH = ""
 
 MODEL_CHOICES = {
     "Gemini 3 Flash (rapide)": "gemini-3-flash",
@@ -42,7 +42,7 @@ st.set_page_config(page_title="MathTutorAI — Générateur d'exercices", layout
 # UI: Background logo (flou)
 # ----------------------------
 def inject_blurred_logo_background(logo_path: str):
-    if not os.path.exists(logo_path):
+    if not logo_path or not os.path.exists(logo_path):
         return
     try:
         with open(logo_path, "rb") as f:
@@ -92,11 +92,9 @@ st.caption("Interface en français • Sélectionnez une section et un chapitre,
 # Helpers
 # ----------------------------
 def get_api_key() -> str:
-    # env var first
     k = os.getenv("GEMINI_API_KEY", "").strip()
     if k:
         return k
-    # streamlit secrets
     try:
         return str(st.secrets.get("GEMINI_API_KEY", "")).strip()
     except Exception:
@@ -151,33 +149,25 @@ def parse_exercise_solution(gen_text: str) -> tuple[str, str]:
 
 def build_solution_blocks(enonce: str, raw_solution: str) -> str:
     """
-    Ensure we have strict blocks for parse_blocks + verification engine:
+    Ensure strict blocks:
     EXERCICE:
-    ...
     SOLUTION:
-    ...
     FINAL_ANSWER:
-    ...
     CHECK:
-    ...
     """
     enonce = (enonce or "").strip()
     raw_solution = (raw_solution or "").strip()
 
-    # If already contains blocks, keep as is
     blocks = extract_blocks(raw_solution)
     if blocks and ("FINAL_ANSWER" in blocks or "CHECK" in blocks or "SOLUTION" in blocks):
-        # Make sure EXERCICE exists
         if "EXERCICE" not in blocks:
             blocks["EXERCICE"] = enonce
-        # Rebuild strict
         parts = []
         for h in ["EXERCICE", "SOLUTION", "FINAL_ANSWER", "CHECK"]:
-            if h in blocks and blocks[h].strip():
+            if h in blocks and (blocks[h] or "").strip():
                 parts.append(f"{h}:\n{blocks[h].strip()}")
         return "\n\n".join(parts).strip()
 
-    # Otherwise wrap as SOLUTION-only blocks (FINAL_ANSWER/CHECK empty for now)
     return (
         f"EXERCICE:\n{enonce}\n\n"
         f"SOLUTION:\n{raw_solution}\n\n"
@@ -201,8 +191,8 @@ def render_verification(rep):
 
 @st.cache_data(show_spinner=False)
 def load_db():
-    base = load_exercises(DB_PATH)  # list[Exercise]
-    gen = load_generated(GEN_PATH)  # list[dict]
+    base = load_exercises(DB_PATH)
+    gen = load_generated(GEN_PATH)
 
     from generator.data_loader import Exercise
 
@@ -258,13 +248,23 @@ embedder = Embedder()
 # Session state
 # ----------------------------
 st.session_state.setdefault("exercise_enonce", "")
-st.session_state.setdefault("exercise_solution", "")          # what we display (solution text only)
-st.session_state.setdefault("solution_blocks", "")            # full blocks text (EXERCICE/SOLUTION/FINAL_ANSWER/CHECK)
-st.session_state.setdefault("verified_solution_blocks", "")   # blocks text that was actually verified
+
+# IMPORTANT:
+# - hidden_solution: solution (ou correction) stockée mais NON affichée tant que le bouton n'est pas cliqué.
+# - exercise_solution: ce qui est affiché à l'écran (solution visible).
+st.session_state.setdefault("hidden_solution", "")
+st.session_state.setdefault("exercise_solution", "")
+
+st.session_state.setdefault("solution_blocks", "")
+st.session_state.setdefault("verified_solution_blocks", "")
 st.session_state.setdefault("chat_history", [])
 st.session_state.setdefault("verify_report", None)
 st.session_state.setdefault("saved_current", False)
 st.session_state.setdefault("retrieved", [])
+st.session_state.setdefault("generated_text", "")
+
+# Flag d'affichage
+st.session_state.setdefault("show_solution", False)
 
 
 # ----------------------------
@@ -274,12 +274,16 @@ colA, colB = st.columns(2)
 
 with colA:
     if st.button("🧠 Générer un nouvel exercice"):
+        # Reset everything for a fresh start
         st.session_state.saved_current = False
         st.session_state.verify_report = None
         st.session_state.verified_solution_blocks = ""
         st.session_state.solution_blocks = ""
         st.session_state.exercise_solution = ""
+        st.session_state.hidden_solution = ""
         st.session_state.chat_history = []
+        st.session_state.generated_text = ""
+        st.session_state.show_solution = False  # <-- FIX: hide solution until user clicks
 
         retrieved = retrieve_similar(embedder=embedder, pool=pool, k=top_k)
         st.session_state.retrieved = retrieved
@@ -303,7 +307,13 @@ with colA:
         ex, sol = parse_exercise_solution(gen_text)
 
         st.session_state.exercise_enonce = ex
-        st.session_state.exercise_solution = sol  # may be empty
+
+        # CRUCIAL FIX:
+        # On stocke la solution générée en "hidden_solution" mais on n'affiche rien
+        st.session_state.hidden_solution = sol  # peut être vide
+        st.session_state.exercise_solution = ""  # rien à afficher avant le clic
+
+        # On garde des blocks internes (utile pour debug), mais NON affichés tant que show_solution=False
         st.session_state.solution_blocks = build_solution_blocks(ex, sol)
 
 with colB:
@@ -339,9 +349,11 @@ with col1:
         if not st.session_state.exercise_enonce.strip():
             st.warning("Veuillez d'abord générer un exercice.")
         else:
+            # Le clic DOIT activer l'affichage
+            st.session_state.show_solution = True
+
             llm = get_llm(model_name)
 
-            # If blocks missing FINAL_ANSWER/CHECK, ask the model in strict format
             sol_prompt = f"""
 Tu es un professeur de mathématiques.
 
@@ -379,23 +391,28 @@ CHECK:
             )
             out_text = (out_text or "").replace("\r\n", "\n").strip()
 
-            # Store full blocks, and also store display solution
+            # Store full blocks
             st.session_state.solution_blocks = out_text
             blocks = extract_blocks(out_text)
-            st.session_state.exercise_solution = (blocks.get("SOLUTION", "") or "").strip()
+
+            # Store both:
+            # - hidden_solution for tutor reference
+            # - exercise_solution for display (because now show_solution=True)
+            st.session_state.hidden_solution = (blocks.get("SOLUTION", "") or "").strip()
+            st.session_state.exercise_solution = st.session_state.hidden_solution
 
             # ✅ Auto-fix + verify
             fixed_enonce, fixed_blocks = auto_fix_solution_for_verify(
                 st.session_state.exercise_enonce,
-                st.session_state.solution_blocks
+                st.session_state.solution_blocks,
             )
 
             rep = verify(topic, fixed_enonce, fixed_blocks)
             st.session_state.verify_report = rep
             st.session_state.verified_solution_blocks = fixed_blocks
 
-    # Display solution if available
-    if st.session_state.exercise_solution.strip():
+    # DISPLAY: only if user has clicked (show_solution=True)
+    if st.session_state.show_solution and st.session_state.exercise_solution.strip():
         st.markdown("### SOLUTION")
         st.write(st.session_state.exercise_solution)
     else:
@@ -409,9 +426,8 @@ CHECK:
             st.code(st.session_state.get("verified_solution_blocks", ""), language="text")
 
     # Save after verification (only once)
-    if st.session_state.exercise_enonce.strip() and st.session_state.exercise_solution.strip():
+    if st.session_state.exercise_enonce.strip() and st.session_state.hidden_solution.strip():
         if st.session_state.get("verify_report") is not None and (not st.session_state.saved_current):
-            # Extract final_answer from verified blocks (best)
             fa = get_final_answer(st.session_state.get("verified_solution_blocks", "")) or ""
 
             append_generated(
@@ -421,7 +437,6 @@ CHECK:
                     "section": section,
                     "topic": topic,
                     "enonce": st.session_state.exercise_enonce,
-                    # store verified blocks (stronger for future debug)
                     "solution": st.session_state.get("verified_solution_blocks", st.session_state.solution_blocks),
                     "final_answer": fa,
                     "model": model_name,
@@ -441,11 +456,10 @@ CHECK:
                 },
             )
 
-            # Update embedder memory IF supported
             if hasattr(embedder, "add_document"):
                 try:
                     embedder.add_document(
-                        text=st.session_state.exercise_enonce + "\n" + st.session_state.exercise_solution,
+                        text=st.session_state.exercise_enonce + "\n" + st.session_state.hidden_solution,
                         metadata={"section": section, "topic": topic, "model": model_name},
                     )
                 except Exception:
@@ -474,9 +488,12 @@ with col2:
             llm = get_llm(model_name)
             system_prompt = build_system_prompt()
 
+            # IMPORTANT:
+            # Utiliser hidden_solution (même si l'utilisateur n'a pas affiché la solution),
+            # pour que le tuteur puisse aider correctement.
             tutor_user_prompt = (
                 f"Exercice:\n{st.session_state.exercise_enonce}\n\n"
-                f"Référence (solution complète, ne pas tout révéler d'un coup):\n{st.session_state.exercise_solution}\n\n"
+                f"Référence (solution complète, ne pas tout révéler d'un coup):\n{st.session_state.hidden_solution}\n\n"
                 f"Question de l'élève:\n{user_msg}\n\n"
                 "Règle: répondre en mode tuteur (indices d'abord, questions guidées). "
                 "Ne donne la solution complète que si l'élève la demande explicitement."
